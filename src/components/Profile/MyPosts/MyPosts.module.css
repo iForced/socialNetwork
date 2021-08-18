@@ -1,0 +1,16 @@
+.posts {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.add {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.add textarea {
+    padding: 10px;
+}
+.add button {
+    padding: 10px;
+}

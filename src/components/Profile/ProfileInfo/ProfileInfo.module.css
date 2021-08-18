@@ -1,0 +1,15 @@
+.profile_info {
+    display: flex;
+    flex-direction: column;
+}
+.header img {
+    width: 100%;
+    height: 350px;
+}
+.info {
+    display: flex;
+    align-items: center;
+}
+.info img {
+    width: 300px;
+}

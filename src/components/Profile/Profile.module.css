@@ -1,0 +1,8 @@
+.profile {
+    background-color: wheat;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 100%;
+    gap: 30px;
+}

@@ -1,0 +1,17 @@
+.messages {
+    display: flex;
+    padding: 10px;
+    gap: 40px;
+    align-items: flex-start;
+}
+.dialogs_list {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid black;
+    padding: 10px;
+}
+.messages_list {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}

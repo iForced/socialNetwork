@@ -1,0 +1,12 @@
+.dialogs_item {
+    padding: 10px;
+}
+.dialogs_item a {
+    text-decoration: none;
+    color: black;
+}
+.dialogs_item a.active {
+    color: gold;
+    font-weight: bold;
+    text-decoration: underline;
+}
