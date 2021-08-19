@@ -14,13 +14,13 @@ type PropsType = {
 
 function Messages(props: PropsType) {
     const dialogElement = props.dialogs.map((d: DialogType) => {
-        return <Dialog name={d.name} id={d.id}/>
+        return <Dialog key={d.id} name={d.name} id={d.id}/>
     });
     const messageElement = props.messages.map((m: MessageType) => {
-        return <Message text={m.text} id={m.id}/>
+        return <Message key={m.id} text={m.text} id={m.id}/>
     });
 
-    const messageInput: any = React.createRef();
+    const messageInput = React.createRef<HTMLTextAreaElement>();
 
     const addMessage = () => {
         props.addMessage();
@@ -28,7 +28,7 @@ function Messages(props: PropsType) {
     }
 
     const inputChangeHandler = () => {
-        props.updateMessageText(messageInput.current.value)
+        messageInput.current && props.updateMessageText(messageInput.current.value)
     }
 
     return (

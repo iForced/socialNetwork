@@ -12,7 +12,7 @@ type PropsType = {
 
 function MyPosts(props: PropsType) {
     const postElement = props.posts.map((p: PostType) => {
-        return <Post id={p.id} text={p.text} likes={p.likes}/>
+        return <Post key={p.id} id={p.id} text={p.text} likes={p.likes}/>
     });
 
     const postInput = React.createRef<HTMLTextAreaElement>();

@@ -5,7 +5,7 @@ import {FriendsListType, FriendType} from "../../../redux/store";
 
 function FriendsList(props: FriendsListType) {
     const friendElement = props.friends.map((f: FriendType) => {
-        return <Friend id={f.id} name={f.name} avatar={f.avatar}/>
+        return <Friend key={f.id} id={f.id} name={f.name} avatar={f.avatar}/>
     });
     return (
         <div className={s.friendsList}>
