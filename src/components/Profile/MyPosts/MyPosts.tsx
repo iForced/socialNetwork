@@ -1,9 +1,16 @@
 import React from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {PostType, ProfilePageType} from "../../../redux/state";
+import {PostType} from "../../../redux/store";
 
-function MyPosts(props: ProfilePageType) {
+type PropsType = {
+    posts: Array<PostType>
+    addPost: () => void
+    newPostText: string
+    updatePostText: (text: string) => void
+}
+
+function MyPosts(props: PropsType) {
     const postElement = props.posts.map((p: PostType) => {
         return <Post id={p.id} text={p.text} likes={p.likes}/>
     });
@@ -12,11 +19,11 @@ function MyPosts(props: ProfilePageType) {
 
     const addPost = () => {
         props.addPost();
-        props.updateNewPostText('');
+        props.updatePostText('');
     }
 
     const inputChangeHandler = () => {
-        postInput.current && props.updateNewPostText(postInput.current.value);
+        postInput.current && props.updatePostText(postInput.current.value);
     }
 
     return (

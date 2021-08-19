@@ -2,25 +2,21 @@ import './index.css';
 import ReactDOM from "react-dom";
 import React from "react";
 import App from "../src/App";
-import store, {RootStateType} from './redux/state';
 import reportWebVitals from './reportWebVitals';
+import store from "./redux/store";
 
-const rerender = (state: RootStateType) => {
+const rerender = () => {
     ReactDOM.render(
         <React.StrictMode>
             <App
-                store={store.getState()}
-                addPost={store.addPost.bind(store)}
-                updatePostText={store.updatePostText.bind(store)}
-                addMessage={store.addMessage.bind(store)}
-                updateMessageText={store.updateMessageText.bind(store)}
+                store={store}
             />
         </React.StrictMode>,
         document.getElementById('root')
     );
 }
 
-rerender(store.getState())
+rerender()
 
 store.subscribe(rerender)
 

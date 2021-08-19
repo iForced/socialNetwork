@@ -38,9 +38,9 @@ export type RootStateType = {
 }
 export type StoreType = {
     _state: RootStateType
-    _rerender: (state: RootStateType) => void
+    _rerender: () => void
     getState: () => RootStateType
-    subscribe: (observer: RootStateType) => void
+    subscribe: (observer: () => void) => void
     addPost: () => void
     updatePostText: (text: string) => void
     addMessage: () => void
@@ -82,40 +82,43 @@ const store: StoreType = {
             }
         }
     },
-    _rerender (state: RootStateType) {
+    _rerender () {
         console.log('state rendered')
+    },
+    subscribe(observer) {
+        this._rerender = observer
     },
     getState() {
       return this._state
     },
-    subscribe(observer: any) {
-        this._rerender = observer
-    },
     addPost () {
-        let newPost = {
-            id: this._state.profilePage.posts[store._state.profilePage.posts.length - 1].id + 1,
-            text: this._state.profilePage.newPostText,
-            likes: 22
+        if (this._state.profilePage.newPostText) {
+            let newPost = {
+                id: this._state.profilePage.posts[store._state.profilePage.posts.length - 1].id + 1,
+                text: this._state.profilePage.newPostText,
+                likes: 0
+            }
+            this._state.profilePage.posts.push(newPost)
+            this._rerender()
         }
-        this._state.profilePage.posts.push(newPost)
-        this._rerender(this._state)
     },
     updatePostText (text: string) {
         this._state.profilePage.newPostText = text
-        this._rerender(this._state)
+        this._rerender()
     },
     addMessage () {
-        let newMessage = {
-            id: this._state.messagesPage.messages[this._state.messagesPage.messages.length - 1].id + 1,
-            text: this._state.messagesPage.newMessageText,
-            likes: 22
+        if (this._state.messagesPage.newMessageText) {
+            let newMessage = {
+                id: this._state.messagesPage.messages[this._state.messagesPage.messages.length - 1].id + 1,
+                text: this._state.messagesPage.newMessageText,
+            }
+            this._state.messagesPage.messages.push(newMessage)
+            this._rerender()
         }
-        this._state.messagesPage.messages.push(newMessage)
-        this._rerender(this._state)
     },
     updateMessageText (text: string) {
         this._state.messagesPage.newMessageText = text
-        this._rerender(this._state)
+        this._rerender()
     },
 }
 

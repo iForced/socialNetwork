@@ -1,7 +1,7 @@
 import React from "react";
 import s from './Post.module.css'
 import avatar from './../../../../logo.svg'
-import {PostType} from "../../../../redux/state";
+import {PostType} from "../../../../redux/store";
 
 function Post(props: PostType) {
     return (
