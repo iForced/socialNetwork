@@ -3,20 +3,21 @@ import ReactDOM from "react-dom";
 import React from "react";
 import App from "../src/App";
 import reportWebVitals from './reportWebVitals';
-import store from "./redux/store";
+import store, {RootStateType} from "./redux/store";
 
-const rerender = () => {
+const rerender = (state: RootStateType) => {
     ReactDOM.render(
         <React.StrictMode>
             <App
-                store={store}
+                state={state}
+                dispatch={store.dispatch.bind(store)}
             />
         </React.StrictMode>,
         document.getElementById('root')
     );
 }
 
-rerender()
+rerender(store.getState())
 
 store.subscribe(rerender)
 

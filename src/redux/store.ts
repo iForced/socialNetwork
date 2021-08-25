@@ -38,14 +38,12 @@ export type RootStateType = {
 }
 export type StoreType = {
     _state: RootStateType
-    _rerender: () => void
+    _rerender: (state: RootStateType) => void
     getState: () => RootStateType
-    subscribe: (observer: () => void) => void
-    addPost: () => void
-    updatePostText: (text: string) => void
-    addMessage: () => void
-    updateMessageText: (text: string) => void
+    subscribe: (observer: (state: RootStateType) => void) => void
+    dispatch: (action: {type: ActionType, text?: string}) => void
 }
+export type ActionType = 'ADD-POST' | 'UPDATE-POST-TEXT' | 'ADD-MESSAGE' | 'UPDATE-MESSAGE-TEXT';
 
 const store: StoreType = {
     _state: {
@@ -91,34 +89,33 @@ const store: StoreType = {
     getState() {
       return this._state
     },
-    addPost () {
-        if (this._state.profilePage.newPostText) {
-            let newPost = {
-                id: this._state.profilePage.posts[store._state.profilePage.posts.length - 1].id + 1,
-                text: this._state.profilePage.newPostText,
-                likes: 0
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            if (this._state.profilePage.newPostText) {
+                let newPost = {
+                    id: this._state.profilePage.posts[store._state.profilePage.posts.length - 1].id + 1,
+                    text: this._state.profilePage.newPostText,
+                    likes: 0
+                }
+                this._state.profilePage.posts.push(newPost)
+                this._rerender(this._state)
             }
-            this._state.profilePage.posts.push(newPost)
-            this._rerender()
-        }
-    },
-    updatePostText (text: string) {
-        this._state.profilePage.newPostText = text
-        this._rerender()
-    },
-    addMessage () {
-        if (this._state.messagesPage.newMessageText) {
-            let newMessage = {
-                id: this._state.messagesPage.messages[this._state.messagesPage.messages.length - 1].id + 1,
-                text: this._state.messagesPage.newMessageText,
+        } else if (action.type === 'UPDATE-POST-TEXT') {
+            action.text && (this._state.profilePage.newPostText = action.text)
+            this._rerender(this._state)
+        } else if (action.type === 'ADD-MESSAGE') {
+            if (this._state.messagesPage.newMessageText) {
+                let newMessage = {
+                    id: this._state.messagesPage.messages[this._state.messagesPage.messages.length - 1].id + 1,
+                    text: this._state.messagesPage.newMessageText,
+                }
+                this._state.messagesPage.messages.push(newMessage)
+                this._rerender(this._state)
             }
-            this._state.messagesPage.messages.push(newMessage)
-            this._rerender()
+        } else if (action.type === 'UPDATE-MESSAGE-TEXT') {
+            action.text && (this._state.messagesPage.newMessageText = action.text)
+            this._rerender(this._state)
         }
-    },
-    updateMessageText (text: string) {
-        this._state.messagesPage.newMessageText = text
-        this._rerender()
     },
 }
 

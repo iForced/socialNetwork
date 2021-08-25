@@ -9,10 +9,11 @@ import Messages from "./components/Messages/Messages";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {StoreType} from "./redux/store";
+import {ActionType, RootStateType} from "./redux/store";
 
 type PropsType = {
-    store: StoreType
+    state: RootStateType
+    dispatch: (action: { type: ActionType, text?: string }) => void
 }
 
 function App(props: PropsType) {
@@ -21,21 +22,19 @@ function App(props: PropsType) {
             <Header/>
             <main className={"main"}>
                 <BrowserRouter>
-                <Navbar friendsList={props.store.getState().navbar.friendsList}/>
-                    <Route path={"/profile"} render={ () => <Profile posts={props.store.getState().profilePage.posts}
-                                                                     addPost={props.store.addPost.bind(props.store)}
-                                                                     newPostText={props.store.getState().profilePage.newPostText}
-                                                                     updatePostText={props.store.updatePostText.bind(props.store)}/> }
+                    <Navbar friendsList={props.state.navbar.friendsList}/>
+                    <Route path={"/profile"} render={() => <Profile posts={props.state.profilePage.posts}
+                                                                    newPostText={props.state.profilePage.newPostText}
+                                                                    dispatch={props.dispatch}/>}
                     />
-                    <Route path={"/messages"} render={ () => <Messages dialogs={props.store.getState().messagesPage.dialogs}
-                                                                       messages={props.store.getState().messagesPage.messages}
-                                                                       addMessage={props.store.addMessage.bind(props.store)}
-                                                                       newMessageText={props.store.getState().messagesPage.newMessageText}
-                                                                       updateMessageText={props.store.updateMessageText.bind(props.store)}/> }
+                    <Route path={"/messages"} render={() => <Messages dialogs={props.state.messagesPage.dialogs}
+                                                                      messages={props.state.messagesPage.messages}
+                                                                      newMessageText={props.state.messagesPage.newMessageText}
+                                                                      dispatch={props.dispatch}/>}
                     />
-                    <Route path={"/news"} render={ () => <News/> }/>
-                    <Route path={"/music"} render={ () => <Music/> }/>
-                    <Route path={"/settings"} render={ () => <Settings/> }/>
+                    <Route path={"/news"} render={() => <News/>}/>
+                    <Route path={"/music"} render={() => <Music/>}/>
+                    <Route path={"/settings"} render={() => <Settings/>}/>
                 </BrowserRouter>
             </main>
             <Footer/>

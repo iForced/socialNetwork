@@ -1,13 +1,12 @@
 import React from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {PostType} from "../../../redux/store";
+import {ActionType, PostType} from "../../../redux/store";
 
 type PropsType = {
     posts: Array<PostType>
-    addPost: () => void
     newPostText: string
-    updatePostText: (text: string) => void
+    dispatch: (action: { type: ActionType, text?: string }) => void
 }
 
 function MyPosts(props: PropsType) {
@@ -18,21 +17,22 @@ function MyPosts(props: PropsType) {
     const postInput = React.createRef<HTMLTextAreaElement>();
 
     const addPost = () => {
-        props.addPost();
-        props.updatePostText('');
+        props.dispatch({type: "ADD-POST"})
+        props.dispatch({type: "UPDATE-POST-TEXT", text: ''})
     }
 
     const inputChangeHandler = () => {
-        postInput.current && props.updatePostText(postInput.current.value);
+        props.dispatch({type: "UPDATE-POST-TEXT", text: postInput.current?.value})
     }
 
     return (
         <div className={s.posts}>
             <div className={s.add}>
-                <textarea ref={postInput}
-                          onInput={inputChangeHandler}
-                          value={props.newPostText}
-                          placeholder={"Add new post"}
+                <textarea
+                    ref={postInput}
+                    onInput={inputChangeHandler}
+                    value={props.newPostText}
+                    placeholder={"Add new post"}
                 />
                 <button onClick={addPost}>Add post</button>
             </div>
