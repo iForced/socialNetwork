@@ -1,12 +1,12 @@
 import React from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {ActionType, PostType} from "../../../redux/store";
+import {ActionsType, addPostActionCreator, PostType, updatePostTextActionCreator} from "../../../redux/store";
 
 type PropsType = {
     posts: Array<PostType>
-    newPostText: string
-    dispatch: (action: { type: ActionType, text?: string }) => void
+    newPostText: string | undefined
+    dispatch: (action: ActionsType) => void
 }
 
 function MyPosts(props: PropsType) {
@@ -17,12 +17,12 @@ function MyPosts(props: PropsType) {
     const postInput = React.createRef<HTMLTextAreaElement>();
 
     const addPost = () => {
-        props.dispatch({type: "ADD-POST"})
-        props.dispatch({type: "UPDATE-POST-TEXT", text: ''})
+        props.dispatch(addPostActionCreator())
+        props.dispatch(updatePostTextActionCreator(''))
     }
 
     const inputChangeHandler = () => {
-        props.dispatch({type: "UPDATE-POST-TEXT", text: postInput.current?.value})
+        props.dispatch(updatePostTextActionCreator(postInput.current?.value))
     }
 
     return (

@@ -2,13 +2,19 @@ import React from "react";
 import s from './Messages.module.css'
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
-import {ActionType, DialogType, MessageType} from "../../redux/store";
+import {
+    ActionsType,
+    addMessageActionCreator,
+    DialogType,
+    MessageType,
+    updateMessageTextActionCreator
+} from "../../redux/store";
 
 type PropsType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
-    newMessageText: string
-    dispatch: (action: { type: ActionType, text?: string }) => void
+    newMessageText: string | undefined
+    dispatch: (action: ActionsType) => void
 }
 
 function Messages(props: PropsType) {
@@ -22,12 +28,12 @@ function Messages(props: PropsType) {
     const messageInput = React.createRef<HTMLTextAreaElement>();
 
     const addMessage = () => {
-        props.dispatch({type: "ADD-MESSAGE"})
-        props.dispatch({type: "UPDATE-MESSAGE-TEXT", text: ''})
+        props.dispatch(addMessageActionCreator())
+        props.dispatch(updateMessageTextActionCreator(''))
     }
 
     const inputChangeHandler = () => {
-        props.dispatch({type: "UPDATE-MESSAGE-TEXT", text: messageInput.current?.value})
+        props.dispatch(updateMessageTextActionCreator(messageInput.current?.value))
     }
 
     return (

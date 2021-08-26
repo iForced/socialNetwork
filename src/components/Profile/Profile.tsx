@@ -1,13 +1,13 @@
 import React from "react";
 import s from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
-import {ActionType, PostType} from "../../redux/store";
+import {ActionsType, PostType} from "../../redux/store";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 type PropsType = {
     posts: Array<PostType>
-    newPostText: string
-    dispatch: (action: { type: ActionType, text?: string }) => void
+    newPostText: string | undefined
+    dispatch: (action: ActionsType) => void
 }
 
 function Profile(props: PropsType) {

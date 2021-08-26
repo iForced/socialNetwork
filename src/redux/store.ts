@@ -5,7 +5,7 @@ export type PostType = {
 }
 export type ProfilePageType = {
     posts: Array<PostType>
-    newPostText: string
+    newPostText: string | undefined
 }
 export type DialogType = {
     id: number
@@ -18,7 +18,7 @@ export type MessageType = {
 export type MessagesPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
-    newMessageText: string
+    newMessageText: string | undefined
 }
 export type FriendType = {
     id: number
@@ -41,9 +41,15 @@ export type StoreType = {
     _rerender: (state: RootStateType) => void
     getState: () => RootStateType
     subscribe: (observer: (state: RootStateType) => void) => void
-    dispatch: (action: {type: ActionType, text?: string}) => void
+    dispatch: (action: ActionsType) => void
 }
-export type ActionType = 'ADD-POST' | 'UPDATE-POST-TEXT' | 'ADD-MESSAGE' | 'UPDATE-MESSAGE-TEXT';
+
+export type AddPostActionType = ReturnType<typeof addPostActionCreator>
+export type UpdatePostTextActionType = ReturnType<typeof updatePostTextActionCreator>
+export type AddMessageActionType = ReturnType<typeof addMessageActionCreator>
+export type UpdateMessageTextActionType = ReturnType<typeof updateMessageTextActionCreator>
+
+export type ActionsType = AddPostActionType | UpdatePostTextActionType | AddMessageActionType | UpdateMessageTextActionType
 
 const store: StoreType = {
     _state: {
@@ -101,7 +107,7 @@ const store: StoreType = {
                 this._rerender(this._state)
             }
         } else if (action.type === 'UPDATE-POST-TEXT') {
-            action.text && (this._state.profilePage.newPostText = action.text)
+            this._state.profilePage.newPostText = action.text
             this._rerender(this._state)
         } else if (action.type === 'ADD-MESSAGE') {
             if (this._state.messagesPage.newMessageText) {
@@ -113,10 +119,23 @@ const store: StoreType = {
                 this._rerender(this._state)
             }
         } else if (action.type === 'UPDATE-MESSAGE-TEXT') {
-            action.text && (this._state.messagesPage.newMessageText = action.text)
+            this._state.messagesPage.newMessageText = action.text
             this._rerender(this._state)
         }
     },
+}
+
+export const addPostActionCreator = () => {
+    return {type: 'ADD-POST'} as const
+}
+export const updatePostTextActionCreator = (text: string | undefined) => {
+    return {type: 'UPDATE-POST-TEXT', text: text} as const
+}
+export const addMessageActionCreator = () => {
+    return {type: 'ADD-MESSAGE'} as const
+}
+export const updateMessageTextActionCreator = (text: string | undefined) => {
+    return {type: 'UPDATE-MESSAGE-TEXT', text: text} as const
 }
 
 export default store;
