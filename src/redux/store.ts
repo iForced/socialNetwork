@@ -43,13 +43,17 @@ export type StoreType = {
     subscribe: (observer: (state: RootStateType) => void) => void
     dispatch: (action: ActionsType) => void
 }
-
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type UpdatePostTextActionType = ReturnType<typeof updatePostTextActionCreator>
 export type AddMessageActionType = ReturnType<typeof addMessageActionCreator>
 export type UpdateMessageTextActionType = ReturnType<typeof updateMessageTextActionCreator>
-
 export type ActionsType = AddPostActionType | UpdatePostTextActionType | AddMessageActionType | UpdateMessageTextActionType
+
+const
+    ADD_POST = 'ADD-POST',
+    UPDATE_POST_TEXT = 'UPDATE-POST-TEXT',
+    ADD_MESSAGE = 'ADD-MESSAGE',
+    UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT'
 
 const store: StoreType = {
     _state: {
@@ -96,7 +100,7 @@ const store: StoreType = {
       return this._state
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             if (this._state.profilePage.newPostText) {
                 let newPost = {
                     id: this._state.profilePage.posts[store._state.profilePage.posts.length - 1].id + 1,
@@ -106,10 +110,10 @@ const store: StoreType = {
                 this._state.profilePage.posts.push(newPost)
                 this._rerender(this._state)
             }
-        } else if (action.type === 'UPDATE-POST-TEXT') {
+        } else if (action.type === UPDATE_POST_TEXT) {
             this._state.profilePage.newPostText = action.text
             this._rerender(this._state)
-        } else if (action.type === 'ADD-MESSAGE') {
+        } else if (action.type === ADD_MESSAGE) {
             if (this._state.messagesPage.newMessageText) {
                 let newMessage = {
                     id: this._state.messagesPage.messages[this._state.messagesPage.messages.length - 1].id + 1,
@@ -118,7 +122,7 @@ const store: StoreType = {
                 this._state.messagesPage.messages.push(newMessage)
                 this._rerender(this._state)
             }
-        } else if (action.type === 'UPDATE-MESSAGE-TEXT') {
+        } else if (action.type === UPDATE_MESSAGE_TEXT) {
             this._state.messagesPage.newMessageText = action.text
             this._rerender(this._state)
         }
@@ -126,16 +130,16 @@ const store: StoreType = {
 }
 
 export const addPostActionCreator = () => {
-    return {type: 'ADD-POST'} as const
+    return {type: ADD_POST} as const
 }
 export const updatePostTextActionCreator = (text: string | undefined) => {
-    return {type: 'UPDATE-POST-TEXT', text: text} as const
+    return {type: UPDATE_POST_TEXT, text: text} as const
 }
 export const addMessageActionCreator = () => {
-    return {type: 'ADD-MESSAGE'} as const
+    return {type: ADD_MESSAGE} as const
 }
 export const updateMessageTextActionCreator = (text: string | undefined) => {
-    return {type: 'UPDATE-MESSAGE-TEXT', text: text} as const
+    return {type: UPDATE_MESSAGE_TEXT, text: text} as const
 }
 
 export default store;
