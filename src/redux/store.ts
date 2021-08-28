@@ -1,5 +1,5 @@
-import profileReducer from "./profileReducer";
-import messagesReducer from "./messagesReducer";
+import profileReducer, {addPostActionCreator, updatePostTextActionCreator} from "./profileReducer";
+import messagesReducer, {addMessageActionCreator, updateMessageTextActionCreator} from "./messagesReducer";
 import navbarReducer from "./navbarReducer";
 
 export type PostType = {
@@ -53,12 +53,6 @@ export type AddMessageActionType = ReturnType<typeof addMessageActionCreator>
 export type UpdateMessageTextActionType = ReturnType<typeof updateMessageTextActionCreator>
 export type ActionsType = AddPostActionType | UpdatePostTextActionType | AddMessageActionType | UpdateMessageTextActionType
 
-const
-    ADD_POST = 'ADD-POST',
-    UPDATE_POST_TEXT = 'UPDATE-POST-TEXT',
-    ADD_MESSAGE = 'ADD-MESSAGE',
-    UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT'
-
 const store: StoreType = {
     _state: {
         profilePage: {
@@ -110,19 +104,6 @@ const store: StoreType = {
 
         this._rerender(this._state)
     },
-}
-
-export const addPostActionCreator = () => {
-    return {type: ADD_POST} as const
-}
-export const updatePostTextActionCreator = (text: string | undefined) => {
-    return {type: UPDATE_POST_TEXT, text: text} as const
-}
-export const addMessageActionCreator = () => {
-    return {type: ADD_MESSAGE} as const
-}
-export const updateMessageTextActionCreator = (text: string | undefined) => {
-    return {type: UPDATE_MESSAGE_TEXT, text: text} as const
 }
 
 export default store;

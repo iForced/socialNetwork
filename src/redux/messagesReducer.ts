@@ -25,4 +25,11 @@ const messagesReducer = (state: MessagesPageType, action: ActionsType) => {
     }
 }
 
+export const addMessageActionCreator = () => {
+    return {type: ADD_MESSAGE} as const
+}
+export const updateMessageTextActionCreator = (text: string | undefined) => {
+    return {type: UPDATE_MESSAGE_TEXT, text: text} as const
+}
+
 export default messagesReducer
