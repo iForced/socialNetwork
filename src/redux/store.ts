@@ -1,3 +1,7 @@
+import profileReducer from "./profileReducer";
+import messagesReducer from "./messagesReducer";
+import navbarReducer from "./navbarReducer";
+
 export type PostType = {
     id: number
     text: string
@@ -100,32 +104,11 @@ const store: StoreType = {
       return this._state
     },
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            if (this._state.profilePage.newPostText) {
-                let newPost = {
-                    id: this._state.profilePage.posts[store._state.profilePage.posts.length - 1].id + 1,
-                    text: this._state.profilePage.newPostText,
-                    likes: 0
-                }
-                this._state.profilePage.posts.push(newPost)
-                this._rerender(this._state)
-            }
-        } else if (action.type === UPDATE_POST_TEXT) {
-            this._state.profilePage.newPostText = action.text
-            this._rerender(this._state)
-        } else if (action.type === ADD_MESSAGE) {
-            if (this._state.messagesPage.newMessageText) {
-                let newMessage = {
-                    id: this._state.messagesPage.messages[this._state.messagesPage.messages.length - 1].id + 1,
-                    text: this._state.messagesPage.newMessageText,
-                }
-                this._state.messagesPage.messages.push(newMessage)
-                this._rerender(this._state)
-            }
-        } else if (action.type === UPDATE_MESSAGE_TEXT) {
-            this._state.messagesPage.newMessageText = action.text
-            this._rerender(this._state)
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.messagesPage = messagesReducer(this._state.messagesPage, action)
+        this._state.navbar = navbarReducer(this._state.navbar, action)
+
+        this._rerender(this._state)
     },
 }
 
