@@ -7,19 +7,22 @@ const
 
 
 const messagesReducer = (state: MessagesPageType, action: ActionsType) => {
-    if (action.type === ADD_MESSAGE) {
-        if (state.newMessageText) {
-            let newMessage = {
-                id: state.messages[state.messages.length - 1].id + 1,
-                text: state.newMessageText,
+    switch (action.type) {
+        case ADD_MESSAGE:
+            if (state.newMessageText) {
+                let newMessage = {
+                    id: state.messages[state.messages.length - 1].id + 1,
+                    text: state.newMessageText,
+                }
+                state.messages.push(newMessage)
             }
-            state.messages.push(newMessage)
-        }
-    } else if (action.type === UPDATE_MESSAGE_TEXT) {
-        state.newMessageText = action.text
+            return state
+        case UPDATE_MESSAGE_TEXT:
+            state.newMessageText = action.text
+            return state
+        default:
+            return state
     }
-
-    return state
 }
 
 export default messagesReducer
