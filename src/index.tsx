@@ -3,7 +3,8 @@ import ReactDOM from "react-dom";
 import React from "react";
 import App from "../src/App";
 import reportWebVitals from './reportWebVitals';
-import store, {RootStateType} from "./redux/store";
+import {RootStateType} from "./redux/store";
+import store from "./redux/reduxStore";
 
 const rerender = (state: RootStateType) => {
     ReactDOM.render(
@@ -19,7 +20,10 @@ const rerender = (state: RootStateType) => {
 
 rerender(store.getState())
 
-store.subscribe(rerender)
+store.subscribe(() => {
+    const state = store.getState()
+    rerender(state)
+})
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
