@@ -1,0 +1,13 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.list_item {
+    display: flex;
+    gap: 10px;
+    background-color: green;
+}
+.list_item.uncompleted {
+    background-color: red;
+}
