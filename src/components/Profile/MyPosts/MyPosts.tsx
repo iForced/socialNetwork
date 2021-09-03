@@ -1,13 +1,13 @@
 import React from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {addPostActionCreator, updatePostTextActionCreator} from "../../../redux/profileReducer";
-import {ActionsType, PostType} from "../../../redux/store";
+import {PostType} from "../../../redux/store";
 
 type PropsType = {
-    posts: Array<PostType>
+    addPost: () => void
+    updatePostText: (text: string | undefined) => void
     newPostText: string | undefined
-    dispatch: (action: ActionsType) => void
+    posts: Array<PostType>
 }
 
 function MyPosts(props: PropsType) {
@@ -18,12 +18,11 @@ function MyPosts(props: PropsType) {
     const postInput = React.createRef<HTMLTextAreaElement>();
 
     const addPost = () => {
-        props.dispatch(addPostActionCreator())
-        props.dispatch(updatePostTextActionCreator(''))
+        props.addPost()
     }
 
     const inputChangeHandler = () => {
-        props.dispatch(updatePostTextActionCreator(postInput.current?.value))
+        props.updatePostText(postInput.current?.value)
     }
 
     return (
