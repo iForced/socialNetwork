@@ -9,7 +9,8 @@ type PropsType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
     newMessageText: string | undefined
-    dispatch: (action: ActionsType) => void
+    addMessage: () => void
+    updateMessageText: (text: string | undefined) => void
 }
 
 function Messages(props: PropsType) {
@@ -23,12 +24,11 @@ function Messages(props: PropsType) {
     const messageInput = React.createRef<HTMLTextAreaElement>();
 
     const addMessage = () => {
-        props.dispatch(addMessageActionCreator())
-        props.dispatch(updateMessageTextActionCreator(''))
+        props.addMessage()
     }
 
     const inputChangeHandler = () => {
-        props.dispatch(updateMessageTextActionCreator(messageInput.current?.value))
+        props.updateMessageText(messageInput.current?.value)
     }
 
     return (
