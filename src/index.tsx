@@ -4,15 +4,16 @@ import React from "react";
 import App from "../src/App";
 import reportWebVitals from './reportWebVitals';
 import {RootStateType} from "./redux/store";
-import store from "./redux/reduxStore";
+import {Provider} from './StoreContext';
+// import store from './redux/store'
+import store from './redux/reduxStore'
 
 const rerender = (state: RootStateType) => {
     ReactDOM.render(
         <React.StrictMode>
-            <App
-                state={state}
-                dispatch={store.dispatch.bind(store)}
-            />
+            <Provider store={store}>
+                <App />
+            </Provider>
         </React.StrictMode>,
         document.getElementById('root')
     );

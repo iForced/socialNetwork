@@ -5,7 +5,6 @@ import Footer from "./components/Footer/Footer";
 import Profile from "./components/Profile/Profile";
 import Navbar from "./components/Navbar/Navbar";
 import {BrowserRouter, Route} from "react-router-dom";
-import Messages from "./components/Messages/Messages";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
@@ -17,23 +16,16 @@ type PropsType = {
     dispatch: (action: ActionsType) => void
 }
 
-function App(props: PropsType) {
+function App() {
     return (
         <div className="App">
             <Header/>
             <main className={"main"}>
                 <BrowserRouter>
-                    <Navbar friendsList={props.state.navbar.friendsList}/>
-                    <Route path={"/profile"} render={() => <Profile
-                        posts={props.state.profilePage.posts}
-                        newPostText={props.state.profilePage.newPostText}
-                        dispatch={props.dispatch}/>}
+                    <Navbar />
+                    <Route path={"/profile"} render={() => <Profile />}
                     />
-                    <Route path={"/messages"} render={() => <MessagesContainer
-                        dialogs={props.state.messagesPage.dialogs}
-                        messages={props.state.messagesPage.messages}
-                        newMessageText={props.state.messagesPage.newMessageText}
-                        dispatch={props.dispatch}/>}
+                    <Route path={"/messages"} render={() => <MessagesContainer/>}
                     />
                     <Route path={"/news"} render={() => <News/>}/>
                     <Route path={"/music"} render={() => <Music/>}/>

@@ -4,7 +4,7 @@ import s from './Navbar.module.css'
 import FriendsList from "./FriendsList/FriendsList";
 import {NavbarType} from "../../redux/store";
 
-function Navbar(props: NavbarType) {
+function Navbar() {
     return (
         <div className={s.sidebar}>
             <nav className={s.navbar}>
@@ -14,7 +14,7 @@ function Navbar(props: NavbarType) {
                 <div className={s.navbar_item}><NavLink to={"/music"} activeClassName={s.active}>Music</NavLink></div>
                 <div className={s.navbar_item}><NavLink to={"/settings"} activeClassName={s.active}>Settings</NavLink></div>
             </nav>
-            <FriendsList  friends={props.friendsList.friends}/>
+            {/*<FriendsList  friends={props.friendsList.friends}/>*/}
         </div>
     )
 }

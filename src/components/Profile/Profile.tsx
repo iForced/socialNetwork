@@ -10,15 +10,11 @@ type PropsType = {
     dispatch: (action: ActionsType) => void
 }
 
-function Profile(props: PropsType) {
+function Profile() {
     return (
         <div className={s.profile}>
             <ProfileInfo/>
-            <MyPostsContainer
-                posts={props.posts}
-                newPostText={props.newPostText}
-                dispatch={props.dispatch}
-            />
+            <MyPostsContainer />
         </div>
     )
 }
