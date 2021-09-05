@@ -7,19 +7,19 @@ export type PostType = {
     text: string
     likes: number
 }
-export type ProfilePageType = {
+type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string | undefined
 }
-export type DialogType = {
+type DialogType = {
     id: number
     name: string
 }
-export type MessageType = {
+type MessageType = {
     id: number
     text: string
 }
-export type MessagesPageType = {
+type MessagesPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
     newMessageText: string | undefined

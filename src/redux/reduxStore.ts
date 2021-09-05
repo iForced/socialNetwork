@@ -3,12 +3,14 @@ import profileReducer from "./profileReducer";
 import messagesReducer from "./messagesReducer";
 import navbarReducer from "./navbarReducer";
 
-const reducers = combineReducers({
+const rootReducer = combineReducers({
     profilePage: profileReducer,
     messagesPage: messagesReducer,
     navbar: navbarReducer,
 })
 
-const store = createStore(reducers)
+export type AppStateType = ReturnType<typeof rootReducer>
+
+const store = createStore(rootReducer)
 
 export default store

@@ -4,9 +4,9 @@ import React from "react";
 import App from "../src/App";
 import reportWebVitals from './reportWebVitals';
 import {RootStateType} from "./redux/store";
-import {Provider} from './StoreContext';
 // import store from './redux/store'
 import store from './redux/reduxStore'
+import {Provider} from "react-redux";
 
 const rerender = (state: RootStateType) => {
     ReactDOM.render(
