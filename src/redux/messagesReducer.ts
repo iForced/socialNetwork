@@ -1,5 +1,5 @@
-import {ActionsType} from "./store";
 import {DialogType, MessageType} from "../components/Messages/MessagesContainer";
+import {ActionsType} from "./reduxStore";
 
 export type MessagesPageType = {
     dialogs: Array<DialogType>

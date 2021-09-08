@@ -1,4 +1,5 @@
-import {ActionsType, NavbarType} from "./store";
+import {NavbarType} from "./store";
+import {ActionsType} from "./reduxStore";
 
 const initialState = {
     friendsList: {

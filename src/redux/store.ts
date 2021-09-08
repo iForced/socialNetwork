@@ -1,8 +1,9 @@
 import profileReducer, {addPostActionCreator, updatePostTextActionCreator} from "./profileReducer";
 import messagesReducer, {addMessageActionCreator, updateMessageTextActionCreator} from "./messagesReducer";
 import navbarReducer from "./navbarReducer";
+import {followAC, unfollowAC} from "./usersReducer";
 
-export type PostType = {
+type PostType = {
     id: number
     text: string
     likes: number
@@ -47,11 +48,13 @@ export type StoreType = {
     subscribe: (observer: (state: RootStateType) => void) => void
     dispatch: (action: ActionsType) => void
 }
-export type AddPostActionType = ReturnType<typeof addPostActionCreator>
-export type UpdatePostTextActionType = ReturnType<typeof updatePostTextActionCreator>
-export type AddMessageActionType = ReturnType<typeof addMessageActionCreator>
-export type UpdateMessageTextActionType = ReturnType<typeof updateMessageTextActionCreator>
-export type ActionsType = AddPostActionType | UpdatePostTextActionType | AddMessageActionType | UpdateMessageTextActionType
+type AddPostActionType = ReturnType<typeof addPostActionCreator>
+type UpdatePostTextActionType = ReturnType<typeof updatePostTextActionCreator>
+type AddMessageActionType = ReturnType<typeof addMessageActionCreator>
+type UpdateMessageTextActionType = ReturnType<typeof updateMessageTextActionCreator>
+type followUserActionType = ReturnType<typeof followAC>
+type unfollowUserActionType = ReturnType<typeof unfollowAC>
+type ActionsType = AddPostActionType | UpdatePostTextActionType | AddMessageActionType | UpdateMessageTextActionType | followUserActionType | unfollowUserActionType
 
 const store: StoreType = {
     _state: {

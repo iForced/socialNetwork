@@ -1,5 +1,10 @@
-import {ActionsType, PostType} from "./store";
+import {ActionsType} from "./reduxStore";
 
+export type PostType = {
+    id: number
+    text: string
+    likes: number
+}
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string | undefined

@@ -9,6 +9,7 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import MessagesContainer from "./components/Messages/MessagesContainer";
+import UsersContainer from './components/Users/UsersContainer';
 
 function App() {
     return (
@@ -17,13 +18,30 @@ function App() {
             <main className={"main"}>
                 <BrowserRouter>
                     <Navbar />
-                    <Route path={"/profile"} render={() => <Profile />}
+                    <Route
+                        path={"/profile"}
+                        render={() => <Profile />}
                     />
-                    <Route path={"/messages"} render={() => <MessagesContainer/>}
+                    <Route
+                        path={"/messages"}
+                        render={() => <MessagesContainer/>}
                     />
-                    <Route path={"/news"} render={() => <News/>}/>
-                    <Route path={"/music"} render={() => <Music/>}/>
-                    <Route path={"/settings"} render={() => <Settings/>}/>
+                    <Route
+                        path={"/users"}
+                        render={() => <UsersContainer />}
+                    />
+                    <Route
+                        path={"/news"}
+                        render={() => <News/>}
+                    />
+                    <Route
+                        path={"/music"}
+                        render={() => <Music/>}
+                    />
+                    <Route
+                        path={"/settings"}
+                        render={() => <Settings/>}
+                    />
                 </BrowserRouter>
             </main>
             <Footer/>
