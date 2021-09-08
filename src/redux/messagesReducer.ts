@@ -32,15 +32,14 @@ const messagesReducer = (state: MessagesPageType = initialState, action: Actions
         case ADD_MESSAGE:
             if (state.newMessageText) {
                 let newMessage = {
-                    id: state.messages[state.messages.length - 1].id + 1,
+                    id: Math.floor(Math.random() * 10),
                     text: state.newMessageText,
                 }
-                state.messages.push(newMessage)
+                return {...state, messages: [...state.messages, newMessage]}
             }
             return state
         case UPDATE_MESSAGE_TEXT:
-            state.newMessageText = action.text
-            return state
+            return {...state, newMessageText: action.text}
         default:
             return state
     }

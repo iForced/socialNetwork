@@ -23,16 +23,15 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
         case ADD_POST:
             if (state.newPostText) {
                 let newPost = {
-                    id: state.posts[state.posts.length - 1].id + 1,
+                    id: Math.floor(Math.random() * 10),
                     text: state.newPostText,
                     likes: 0
                 }
-                state.posts.push(newPost)
+                return {...state, posts: [...state.posts, newPost]}
             }
             return state
         case UPDATE_POST_TEXT:
-            state.newPostText = action.text
-            return state
+            return {...state, newPostText: action.text}
         default:
             return state
 
