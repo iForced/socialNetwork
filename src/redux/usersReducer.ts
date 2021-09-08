@@ -8,6 +8,7 @@ const
 export type UserType = {
     id: number
     name: string
+    avatar: string
     status: string
     followed: boolean
     location: {city: string, country: string}
@@ -17,11 +18,7 @@ type UsersPageType = {
 }
 
 const initialState: UsersPageType = {
-    users: [
-        // {id: 1, name: 'Valera', status: 'I am a boss', followed: false, location: {city: 'Minsk', country: 'Belarus'}},
-        // {id: 2, name: 'Sanya', status: 'I am a programmer', followed: true, location: {city: 'Moscow', country: 'Russia'}},
-        // {id: 3, name: 'Kazbek', status: 'I am from zavod', followed: true, location: {city: 'Kyiv', country: 'Ukraine'}},
-    ]
+    users: []
 }
 
 export const followAC = (userID: number) => {

@@ -1,0 +1,28 @@
+.users_container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+    margin: 30px 0;
+}
+.user {
+    display: flex;
+    gap: 10px;
+    width: 1000px;
+    background-color: gray;
+    padding: 10px 30px;
+}
+.user_avatar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.user_avatar img {
+    width: 100px;
+}
+.user_info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
