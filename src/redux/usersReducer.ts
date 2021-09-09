@@ -8,10 +8,10 @@ const
 export type UserType = {
     id: number
     name: string
-    avatar: string
     status: string
+    photos: {small: string, large: string}
     followed: boolean
-    location: {city: string, country: string}
+    // location: {city: string, country: string}
 }
 type UsersPageType = {
     users: Array<UserType>
