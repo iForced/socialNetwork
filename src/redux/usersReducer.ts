@@ -3,7 +3,9 @@ import {ActionsType} from "./reduxStore";
 const
     FOLLOW = 'FOLLOW',
     UNFOLLOW = 'UNFOLLOW',
-    SET_USERS = 'SET-USERS'
+    SET_USERS = 'SET-USERS',
+    SET_PAGE = 'SET-PAGE',
+    SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT'
 
 export type UserType = {
     id: number
@@ -11,14 +13,19 @@ export type UserType = {
     status: string
     photos: {small: string, large: string}
     followed: boolean
-    // location: {city: string, country: string}
 }
 type UsersPageType = {
     users: Array<UserType>
+    currentPage: number
+    totalUsersCount: number
+    usersPerPage: number
 }
 
 const initialState: UsersPageType = {
-    users: []
+    users: [],
+    currentPage: 1,
+    totalUsersCount: 0,
+    usersPerPage: 5,
 }
 
 export const followAC = (userID: number) => {
@@ -30,6 +37,12 @@ export const unfollowAC = (userID: number) => {
 export const setUsersAC = (users: Array<UserType>) => {
     return {type: SET_USERS, users: users} as const
 }
+export const setPageAC = (pageNumber: number) => {
+    return {type: SET_PAGE, pageNumber: pageNumber} as const
+}
+export const setTotalUsersCountAC = (count: number) => {
+    return {type: SET_TOTAL_USERS_COUNT, totalUsersCount: count} as const
+}
 
 export const usersReducer = (state: UsersPageType = initialState, action: ActionsType): UsersPageType => {
     switch (action.type) {
@@ -38,7 +51,11 @@ export const usersReducer = (state: UsersPageType = initialState, action: Action
         case UNFOLLOW:
             return {...state, users: state.users.map(u => u.id === action.userID ? {...u, followed: false} : u)}
         case SET_USERS:
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: action.users}
+        case SET_PAGE:
+            return {...state, currentPage: action.pageNumber}
+        case SET_TOTAL_USERS_COUNT:
+            return {...state, totalUsersCount: action.totalUsersCount}
         default:
             return state
     }
