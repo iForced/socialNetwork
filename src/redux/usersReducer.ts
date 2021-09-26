@@ -31,22 +31,22 @@ const initialState: UsersPageType = {
     isFetching: false,
 }
 
-export const followAC = (userID: number) => {
+export const follow = (userID: number) => {
     return {type: FOLLOW, userID: userID} as const
 }
-export const unfollowAC = (userID: number) => {
+export const unfollow = (userID: number) => {
     return {type: UNFOLLOW, userID: userID} as const
 }
-export const setUsersAC = (users: Array<UserType>) => {
+export const setUsers = (users: Array<UserType>) => {
     return {type: SET_USERS, users: users} as const
 }
-export const setPageAC = (pageNumber: number) => {
+export const setPage = (pageNumber: number) => {
     return {type: SET_PAGE, pageNumber: pageNumber} as const
 }
-export const setTotalUsersCountAC = (count: number) => {
+export const setTotalUsersCount = (count: number) => {
     return {type: SET_TOTAL_USERS_COUNT, totalUsersCount: count} as const
 }
-export const toggleIsFetchingAC = (newIsFetching: boolean) => {
+export const toggleIsFetching = (newIsFetching: boolean) => {
     return {type: TOGGLE_IS_FETCHING, isFetching: newIsFetching} as const
 }
 

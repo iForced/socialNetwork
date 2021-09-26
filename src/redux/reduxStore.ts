@@ -3,12 +3,12 @@ import profileReducer, {addPostActionCreator, updatePostTextActionCreator} from 
 import messagesReducer, {addMessageActionCreator, updateMessageTextActionCreator} from "./messagesReducer";
 import navbarReducer from "./navbarReducer";
 import {
-    followAC,
-    setPageAC,
-    setTotalUsersCountAC,
-    setUsersAC,
-    toggleIsFetchingAC,
-    unfollowAC,
+    follow,
+    setPage,
+    setTotalUsersCount,
+    setUsers,
+    toggleIsFetching,
+    unfollow,
     usersReducer
 } from "./usersReducer";
 
@@ -16,12 +16,12 @@ export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type UpdatePostTextActionType = ReturnType<typeof updatePostTextActionCreator>
 export type AddMessageActionType = ReturnType<typeof addMessageActionCreator>
 export type UpdateMessageTextActionType = ReturnType<typeof updateMessageTextActionCreator>
-export type followUserActionType = ReturnType<typeof followAC>
-export type unfollowUserActionType = ReturnType<typeof unfollowAC>
-export type setUsersActionType = ReturnType<typeof setUsersAC>
-export type setPagesActionType = ReturnType<typeof setPageAC>
-export type setTotalUsersCountActionType = ReturnType<typeof setTotalUsersCountAC>
-export type toggleIsFetchingActionType = ReturnType<typeof toggleIsFetchingAC>
+export type followUserActionType = ReturnType<typeof follow>
+export type unfollowUserActionType = ReturnType<typeof unfollow>
+export type setUsersActionType = ReturnType<typeof setUsers>
+export type setPagesActionType = ReturnType<typeof setPage>
+export type setTotalUsersCountActionType = ReturnType<typeof setTotalUsersCount>
+export type toggleIsFetchingActionType = ReturnType<typeof toggleIsFetching>
 export type ActionsType =
     AddPostActionType |
     UpdatePostTextActionType |

@@ -1,7 +1,7 @@
 import profileReducer, {addPostActionCreator, updatePostTextActionCreator} from "./profileReducer";
 import messagesReducer, {addMessageActionCreator, updateMessageTextActionCreator} from "./messagesReducer";
 import navbarReducer from "./navbarReducer";
-import {followAC, unfollowAC} from "./usersReducer";
+import {follow, unfollow} from "./usersReducer";
 
 type PostType = {
     id: number
@@ -52,8 +52,8 @@ type AddPostActionType = ReturnType<typeof addPostActionCreator>
 type UpdatePostTextActionType = ReturnType<typeof updatePostTextActionCreator>
 type AddMessageActionType = ReturnType<typeof addMessageActionCreator>
 type UpdateMessageTextActionType = ReturnType<typeof updateMessageTextActionCreator>
-type followUserActionType = ReturnType<typeof followAC>
-type unfollowUserActionType = ReturnType<typeof unfollowAC>
+type followUserActionType = ReturnType<typeof follow>
+type unfollowUserActionType = ReturnType<typeof unfollow>
 type ActionsType = AddPostActionType | UpdatePostTextActionType | AddMessageActionType | UpdateMessageTextActionType | followUserActionType | unfollowUserActionType
 
 const store: StoreType = {
