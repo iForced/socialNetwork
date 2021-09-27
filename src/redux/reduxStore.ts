@@ -1,5 +1,5 @@
 import {combineReducers, createStore} from "redux";
-import profileReducer, {addPostActionCreator, updatePostTextActionCreator} from "./profileReducer";
+import profileReducer, {addPostActionCreator, setUserProfile, updatePostTextActionCreator} from "./profileReducer";
 import messagesReducer, {addMessageActionCreator, updateMessageTextActionCreator} from "./messagesReducer";
 import navbarReducer from "./navbarReducer";
 import {
@@ -22,6 +22,7 @@ export type setUsersActionType = ReturnType<typeof setUsers>
 export type setPagesActionType = ReturnType<typeof setPage>
 export type setTotalUsersCountActionType = ReturnType<typeof setTotalUsersCount>
 export type toggleIsFetchingActionType = ReturnType<typeof toggleIsFetching>
+export type setUserProfileActionType = ReturnType<typeof setUserProfile>
 export type ActionsType =
     AddPostActionType |
     UpdatePostTextActionType |
@@ -32,7 +33,8 @@ export type ActionsType =
     setUsersActionType |
     setPagesActionType |
     setTotalUsersCountActionType |
-    toggleIsFetchingActionType
+    toggleIsFetchingActionType |
+    setUserProfileActionType
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,

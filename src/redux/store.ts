@@ -101,7 +101,7 @@ const store: StoreType = {
       return this._state
     },
     dispatch(action) {
-        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        // this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.messagesPage = messagesReducer(this._state.messagesPage, action)
         this._state.navbar = navbarReducer(this._state.navbar, action)
 

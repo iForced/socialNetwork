@@ -31,16 +31,6 @@ type MapDispatchToPropsType = {
 }
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
-    return {
-        users: state.usersPage.users,
-        currentPage: state.usersPage.currentPage,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        usersPerPage: state.usersPage.usersPerPage,
-        isFetching: state.usersPage.isFetching
-    }
-}
-
 class UsersAPI extends React.Component<UsersPropsType> {
 
     componentDidMount() {
@@ -84,6 +74,16 @@ class UsersAPI extends React.Component<UsersPropsType> {
 
             </>
         )
+    }
+}
+
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+    return {
+        users: state.usersPage.users,
+        currentPage: state.usersPage.currentPage,
+        totalUsersCount: state.usersPage.totalUsersCount,
+        usersPerPage: state.usersPage.usersPerPage,
+        isFetching: state.usersPage.isFetching
     }
 }
 
