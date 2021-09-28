@@ -22,10 +22,10 @@ function ProfileInfo(props: PropsType) {
                     <p>Я {props.userProfile?.lookingForAJob ? 'в поиске работы' : 'в данный момент не интересуюсь поиском работы'}</p>
                     {props.userProfile?.lookingForAJob && <p>А точнее {props.userProfile?.lookingForAJobDescription}</p>}
                     <p>Со мной можно связаться здесь:</p>
-                    <p><a href={'https://' + props.userProfile?.contacts.vk}>ВК</a></p>
-                    <p><a href={'https://' + props.userProfile?.contacts.facebook}>FB</a></p>
-                    <p><a href={'https://' + props.userProfile?.contacts.instagram}>Inst</a></p>
-                    <p>Мой github: <a href={'https://' + props.userProfile?.contacts.github}>Github</a></p>
+                    {props.userProfile?.contacts.vk && (<p><a href={'https://' + props.userProfile?.contacts.vk}>ВК</a></p>)}
+                    {props.userProfile?.contacts.facebook && (<p><a href={'https://' + props.userProfile?.contacts.facebook}>FB</a></p>)}
+                    {props.userProfile?.contacts.instagram && (<p><a href={'https://' + props.userProfile?.contacts.instagram}>Inst</a></p>)}
+                    {props.userProfile?.contacts.github && (<p>Мой github: <a href={'https://' + props.userProfile?.contacts.github}>Github</a></p>)}
                 </div>
             </div>
         </div>
