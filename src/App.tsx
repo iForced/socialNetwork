@@ -19,7 +19,7 @@ function App() {
                 <BrowserRouter>
                     <Navbar />
                     <Route
-                        path={"/profile"}
+                        path={"/profile/:userID?"}
                         render={() => <ProfileContainer />}
                     />
                     <Route

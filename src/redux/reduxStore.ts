@@ -47,4 +47,7 @@ export type AppStateType = ReturnType<typeof rootReducer>
 
 const store = createStore(rootReducer)
 
+// @ts-ignore
+window.store = store
+
 export default store
