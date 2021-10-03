@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import {BrowserRouter, Route} from "react-router-dom";
@@ -10,17 +9,18 @@ import Settings from "./components/Settings/Settings";
 import MessagesContainer from "./components/Messages/MessagesContainer";
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 function App() {
     return (
         <div className="App">
-            <Header/>
-            <main className={"main"}>
-                <BrowserRouter>
-                    <Navbar />
+            <BrowserRouter>
+                <HeaderContainer/>
+                <main className={"main"}>
+                    <Navbar/>
                     <Route
                         path={"/profile/:userID?"}
-                        render={() => <ProfileContainer />}
+                        render={() => <ProfileContainer/>}
                     />
                     <Route
                         path={"/messages"}
@@ -28,7 +28,7 @@ function App() {
                     />
                     <Route
                         path={"/users"}
-                        render={() => <UsersContainer />}
+                        render={() => <UsersContainer/>}
                     />
                     <Route
                         path={"/news"}
@@ -42,9 +42,9 @@ function App() {
                         path={"/settings"}
                         render={() => <Settings/>}
                     />
-                </BrowserRouter>
-            </main>
-            <Footer/>
+                </main>
+                <Footer/>
+            </BrowserRouter>
         </div>
     );
 }

@@ -1,14 +1,29 @@
 import React from "react";
 import s from './Header.module.css'
 import logo from './../../logo.svg'
+import {NavLink} from "react-router-dom";
 
-function Header() {
+type PropsType = {
+    id: null | number
+    email: null | string
+    login: null | string
+    isLogged: boolean
+}
+
+function Header(props: PropsType) {
     return (
         <header className={s.header}>
             <div className={s.logo}>
                 <img src={logo} alt={"logo"}/>
             </div>
             <h1>Social network</h1>
+            <div className={s.login}>
+                {
+                    props.isLogged
+                    ? props.login
+                    : <NavLink to={"/login"}>Login</NavLink>
+                }
+            </div>
         </header>
     )
 }

@@ -11,6 +11,7 @@ import {
     unfollow,
     usersReducer
 } from "./usersReducer";
+import {authReducer} from "./authReducer";
 
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type UpdatePostTextActionType = ReturnType<typeof updatePostTextActionCreator>
@@ -41,6 +42,7 @@ const rootReducer = combineReducers({
     messagesPage: messagesReducer,
     navbar: navbarReducer,
     usersPage: usersReducer,
+    auth: authReducer,
 })
 
 export type AppStateType = ReturnType<typeof rootReducer>

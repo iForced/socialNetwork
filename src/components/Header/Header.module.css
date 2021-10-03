@@ -1,7 +1,7 @@
 .header {
     background-color: cadetblue;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 .logo {
