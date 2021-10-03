@@ -4,6 +4,7 @@ import avatar from '../../assets/avatar.png'
 import {UserType} from "../../redux/usersReducer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {usersAPI} from "../../api/api";
 
 type PropsType = {
     users: Array<UserType>
@@ -33,22 +34,10 @@ const Users = (props: PropsType) => {
                     className={s.follow_button}
                     onClick={() => {
                         if (u.followed) {
-                            axios
-                                .delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                                    withCredentials: true,
-                                    headers: {
-                                        'API-KEY': 'ade1566d-0e8e-48e7-bd8d-2867a98c2f5f'
-                                    }
-                                })
+                            usersAPI().unFollowUser(u.id)
                                 .then(response => response.data.resultCode === 0 && props.unfollow(u.id))
                         } else {
-                            axios
-                                .post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                                    withCredentials: true,
-                                    headers: {
-                                        'API-KEY': 'ade1566d-0e8e-48e7-bd8d-2867a98c2f5f'
-                                    }
-                                })
+                            usersAPI().followUser(u.id)
                                 .then(response => response.data.resultCode === 0 && props.follow(u.id))
                         }
                     }}
