@@ -5,12 +5,11 @@ import {
     follow,
     setPage,
     setTotalUsersCount,
-    setUsers,
+    setUsers, toggleFollowingProgress,
     toggleIsFetching,
     unfollow,
     UserType
 } from "../../redux/usersReducer";
-import axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/Preloader";
 import {usersAPI} from "../../api/api";
@@ -21,6 +20,7 @@ type MapStateToPropsType = {
     totalUsersCount: number
     usersPerPage: number
     isFetching: boolean
+    isFollowingProgress: Array<number>
 }
 type MapDispatchToPropsType = {
     follow: (userID: number) => void
@@ -29,6 +29,7 @@ type MapDispatchToPropsType = {
     setPage: (pageNumber: number) => void
     setTotalUsersCount: (count: number) => void
     toggleIsFetching: (newIsFetching: boolean) => void
+    toggleFollowingProgress: (isFetching: boolean, userID: number) => void
 }
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
@@ -68,6 +69,8 @@ class UsersAPI extends React.Component<UsersPropsType> {
                             follow={this.props.follow}
                             unfollow={this.props.unfollow}
                             setCurrentPage={this.setCurrentPage}
+                            isFollowingProgress={this.props.isFollowingProgress}
+                            toggleFollowingProgress={this.props.toggleFollowingProgress}
                         />
                 }
 
@@ -82,7 +85,8 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         currentPage: state.usersPage.currentPage,
         totalUsersCount: state.usersPage.totalUsersCount,
         usersPerPage: state.usersPage.usersPerPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        isFollowingProgress: state.usersPage.isFollowingProgress
     }
 }
 
@@ -93,6 +97,7 @@ const UsersContainer = connect(mapStateToProps, {
     setPage,
     setTotalUsersCount,
     toggleIsFetching,
+    toggleFollowingProgress,
 })(UsersAPI)
 
 export default UsersContainer
