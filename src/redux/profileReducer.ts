@@ -1,4 +1,7 @@
 import {ActionsType} from "./reduxStore";
+import {Dispatch} from "redux";
+import axios from "axios";
+import {profileAPI} from "../api/api";
 
 export type PostType = {
     id: number
@@ -76,6 +79,11 @@ export const updatePostTextActionCreator = (text: string | undefined) => {
 }
 export const setUserProfile = (profile: UserProfileType) => {
     return {type: SET_USER_PROFILE, profile: profile} as const
+}
+export const getProfileThunk = (id: string) => (dispatch: Dispatch) => {
+    profileAPI().getProfile(id)
+        .then(response => response.data)
+        .then(data => dispatch(setUserProfile(data)))
 }
 
 export default profileReducer

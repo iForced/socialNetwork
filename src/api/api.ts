@@ -33,3 +33,11 @@ export const authAPI = () => {
         }
     }
 }
+export const profileAPI = () => {
+    return {
+        getProfile(id: string) {
+            return axiosInstance
+                .get('profile/' + id)
+        }
+    }
+}
