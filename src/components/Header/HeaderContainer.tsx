@@ -1,9 +1,8 @@
 import React from "react";
 import Header from "./Header";
-import axios from "axios";
 import {AppStateType} from "../../redux/reduxStore";
 import {connect} from "react-redux";
-import {setAuthUserData, toggleLogged} from "../../redux/authReducer";
+import {authThunk, setAuthUserData, toggleLogged} from "../../redux/authReducer";
 
 type MapStateToPropsType = {
     id: null | number
@@ -14,21 +13,14 @@ type MapStateToPropsType = {
 type MapDispatchToPropsType = {
     setAuthUserData: (id: number, email: string, login: string) => void
     toggleLogged: (isLogged: boolean) => void
+    authThunk: () => void
 }
 export type HeaderPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 class HeaderContainer extends React.Component<HeaderPropsType> {
 
     componentDidMount() {
-        axios
-            .get('https://social-network.samuraijs.com/api/1.0/auth/me', {withCredentials: true})
-            .then(response => response.data)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    this.props.setAuthUserData(data.data.id, data.data.email, data.data.login)
-                    this.props.toggleLogged(true)
-                }
-            })
+        this.props.authThunk()
     }
 
     render() {
@@ -55,4 +47,5 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 export default connect(mapStateToProps, {
     setAuthUserData,
     toggleLogged,
+    authThunk,
 })(HeaderContainer)

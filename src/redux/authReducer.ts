@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {authAPI} from "../api/api";
+
 type InitialStateType = {
     id: null | number
     email: null | string
@@ -41,4 +44,14 @@ export const toggleLogged = (isLogged: boolean) => {
         type: TOGGLE_LOGGED,
         isLogged,
     } as const
+}
+export const authThunk = () => (dispatch: Dispatch) => {
+    authAPI().me()
+        .then(response => response.data)
+        .then(data => {
+            if (data.resultCode === 0) {
+                dispatch(setAuthUserData(data.data.id, data.data.email, data.data.login))
+                dispatch(toggleLogged(true))
+            }
+        })
 }

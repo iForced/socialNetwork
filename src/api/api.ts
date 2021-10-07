@@ -25,3 +25,11 @@ export const usersAPI = () => {
         }
     }
 }
+export const authAPI = () => {
+    return {
+        me() {
+            return axiosInstance
+                .get('auth/me')
+        }
+    }
+}
