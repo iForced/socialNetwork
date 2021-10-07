@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/reduxStore";
 import {
-    follow,
+    follow, getUsersThunk,
     setPage,
     setTotalUsersCount,
     setUsers, toggleFollowingProgress,
@@ -12,7 +12,6 @@ import {
 } from "../../redux/usersReducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader";
-import {usersAPI} from "../../api/api";
 
 type MapStateToPropsType = {
     users: Array<UserType>
@@ -30,29 +29,19 @@ type MapDispatchToPropsType = {
     setTotalUsersCount: (count: number) => void
     toggleIsFetching: (newIsFetching: boolean) => void
     toggleFollowingProgress: (isFetching: boolean, userID: number) => void
+    getUsersThunk: (currentPage: number, usersPerPage: number) => void
 }
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-class UsersAPI extends React.Component<UsersPropsType> {
+class UsersContainerClass extends React.Component<UsersPropsType> {
 
     componentDidMount() {
-        this.props.toggleIsFetching(true)
-        usersAPI().getUsers(this.props.currentPage, this.props.usersPerPage)
-            .then(response => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(response.items)
-                this.props.setTotalUsersCount(response.totalCount)
-            })
+        this.props.getUsersThunk(this.props.currentPage, this.props.usersPerPage)
     }
 
     setCurrentPage = (pageNumber: number) => {
         this.props.setPage(pageNumber)
-        this.props.toggleIsFetching(true)
-        usersAPI().getUsers(pageNumber, this.props.usersPerPage)
-            .then(response => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(response.items)
-            })
+        this.props.getUsersThunk(pageNumber, this.props.usersPerPage)
     }
 
     render() {
@@ -98,6 +87,7 @@ const UsersContainer = connect(mapStateToProps, {
     setTotalUsersCount,
     toggleIsFetching,
     toggleFollowingProgress,
-})(UsersAPI)
+    getUsersThunk,
+})(UsersContainerClass)
 
 export default UsersContainer

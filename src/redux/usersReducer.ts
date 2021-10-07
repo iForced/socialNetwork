@@ -1,4 +1,6 @@
 import {ActionsType} from "./reduxStore";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
 
 const
     FOLLOW = 'FOLLOW',
@@ -54,6 +56,15 @@ export const toggleIsFetching = (newIsFetching: boolean) => {
 }
 export const toggleFollowingProgress = (isFetching: boolean, userID: number) => {
     return {type: TOGGLE_FOLLOWING_PROGRESS, isFetching, userID} as const
+}
+export const getUsersThunk = (currentPage: number, usersPerPage: number) => (dispatch: any) => {
+    dispatch(toggleIsFetching(true))
+    usersAPI().getUsers(currentPage, usersPerPage)
+        .then(response => {
+            dispatch(toggleIsFetching(false))
+            dispatch(setUsers(response.items))
+            dispatch(setTotalUsersCount(response.totalCount))
+        })
 }
 
 export const usersReducer = (state: UsersPageType = initialState, action: ActionsType): UsersPageType => {
