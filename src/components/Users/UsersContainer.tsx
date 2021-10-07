@@ -2,12 +2,12 @@ import React from "react";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/reduxStore";
 import {
-    follow, getUsersThunk,
+    follow, followUserThunk, getUsersThunk,
     setPage,
     setTotalUsersCount,
     setUsers, toggleFollowingProgress,
     toggleIsFetching,
-    unfollow,
+    unfollow, unFollowUserThunk,
     UserType
 } from "../../redux/usersReducer";
 import Users from "./Users";
@@ -30,6 +30,8 @@ type MapDispatchToPropsType = {
     toggleIsFetching: (newIsFetching: boolean) => void
     toggleFollowingProgress: (isFetching: boolean, userID: number) => void
     getUsersThunk: (currentPage: number, usersPerPage: number) => void
+    unFollowUserThunk: (id: number) => void
+    followUserThunk: (id: number) => void
 }
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
@@ -55,8 +57,8 @@ class UsersContainerClass extends React.Component<UsersPropsType> {
                             currentPage={this.props.currentPage}
                             totalUsersCount={this.props.totalUsersCount}
                             usersPerPage={this.props.usersPerPage}
-                            follow={this.props.follow}
-                            unfollow={this.props.unfollow}
+                            follow={this.props.followUserThunk}
+                            unfollow={this.props.unFollowUserThunk}
                             setCurrentPage={this.setCurrentPage}
                             isFollowingProgress={this.props.isFollowingProgress}
                             toggleFollowingProgress={this.props.toggleFollowingProgress}
@@ -88,6 +90,8 @@ const UsersContainer = connect(mapStateToProps, {
     toggleIsFetching,
     toggleFollowingProgress,
     getUsersThunk,
+    unFollowUserThunk,
+    followUserThunk,
 })(UsersContainerClass)
 
 export default UsersContainer

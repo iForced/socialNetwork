@@ -57,13 +57,29 @@ export const toggleIsFetching = (newIsFetching: boolean) => {
 export const toggleFollowingProgress = (isFetching: boolean, userID: number) => {
     return {type: TOGGLE_FOLLOWING_PROGRESS, isFetching, userID} as const
 }
-export const getUsersThunk = (currentPage: number, usersPerPage: number) => (dispatch: any) => {
+export const getUsersThunk = (currentPage: number, usersPerPage: number) => (dispatch: Dispatch) => {
     dispatch(toggleIsFetching(true))
     usersAPI().getUsers(currentPage, usersPerPage)
         .then(response => {
             dispatch(toggleIsFetching(false))
             dispatch(setUsers(response.items))
             dispatch(setTotalUsersCount(response.totalCount))
+        })
+}
+export const unFollowUserThunk = (id: number) => (dispatch: Dispatch) => {
+    dispatch(toggleFollowingProgress(true, id))
+    usersAPI().unFollowUser(id)
+        .then(response => {
+            response.data.resultCode === 0 && dispatch(unfollow(id))
+            dispatch(toggleFollowingProgress(false, id))
+        })
+}
+export const followUserThunk = (id: number) => (dispatch: Dispatch) => {
+    dispatch(toggleFollowingProgress(true, id))
+    usersAPI().followUser(id)
+        .then(response => {
+            response.data.resultCode === 0 && dispatch(follow(id))
+            dispatch(toggleFollowingProgress(false, id))
         })
 }
 
