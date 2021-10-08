@@ -3,6 +3,7 @@ import s from './Messages.module.css'
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 import {DialogType, MessagesPropsType, MessageType} from "./MessagesContainer";
+import {Redirect} from "react-router-dom";
 
 function Messages(props: MessagesPropsType) {
     const dialogElement = props.dialogs.map((d: DialogType) => {
@@ -23,21 +24,23 @@ function Messages(props: MessagesPropsType) {
     }
 
     return (
-        <div className={s.messages}>
-            <div className={s.dialogs_list}>
-                {dialogElement}
+        props.isLogged
+            ? <div className={s.messages}>
+                <div className={s.dialogs_list}>
+                    {dialogElement}
+                </div>
+                <div className={s.messages_list}>
+                    {messageElement}
+                </div>
+                <textarea
+                    ref={messageInput}
+                    onInput={inputChangeHandler}
+                    value={props.newMessageText}
+                    placeholder={"Type a message"}
+                />
+                <button onClick={addMessage}>Send message</button>
             </div>
-            <div className={s.messages_list}>
-                {messageElement}
-            </div>
-            <textarea
-                ref={messageInput}
-                onInput={inputChangeHandler}
-                value={props.newMessageText}
-                placeholder={"Type a message"}
-            />
-            <button onClick={addMessage}>Send message</button>
-        </div>
+            : <Redirect to={"/login"}/>
     )
 }
 
