@@ -1,6 +1,5 @@
 import {ActionsType} from "./reduxStore";
 import {Dispatch} from "redux";
-import axios from "axios";
 import {profileAPI} from "../api/api";
 
 export type PostType = {

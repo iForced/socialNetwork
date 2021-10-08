@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./Header";
 import {AppStateType} from "../../redux/reduxStore";
 import {connect} from "react-redux";
-import {authThunk, setAuthUserData, toggleLogged} from "../../redux/authReducer";
+import {authThunk} from "../../redux/authReducer";
 
 type MapStateToPropsType = {
     id: null | number
@@ -11,8 +11,6 @@ type MapStateToPropsType = {
     isLogged: boolean
 }
 type MapDispatchToPropsType = {
-    setAuthUserData: (id: number, email: string, login: string) => void
-    toggleLogged: (isLogged: boolean) => void
     authThunk: () => void
 }
 export type HeaderPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -45,7 +43,5 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 }
 
 export default connect(mapStateToProps, {
-    setAuthUserData,
-    toggleLogged,
     authThunk,
 })(HeaderContainer)

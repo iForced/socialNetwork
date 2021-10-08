@@ -3,7 +3,6 @@ import s from './Users.module.css'
 import avatar from '../../assets/avatar.png'
 import {UserType} from "../../redux/usersReducer";
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../api/api";
 
 type PropsType = {
     users: Array<UserType>

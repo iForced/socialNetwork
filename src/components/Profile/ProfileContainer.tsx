@@ -1,6 +1,6 @@
 import React from "react";
 import Profile from "./Profile";
-import {getProfileThunk, setUserProfile, UserProfileType} from "../../redux/profileReducer";
+import {getProfileThunk, UserProfileType} from "../../redux/profileReducer";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/reduxStore";
 import {RouteComponentProps, withRouter} from "react-router-dom";
@@ -9,7 +9,6 @@ type mapStateToPropsType = {
     userProfile: UserProfileType | null
 }
 type mapDispatchToPropsType = {
-    setUserProfile: (profile: UserProfileType) => void
     getProfileThunk: (id: string) => void
 }
 type PathParamsType = {
@@ -39,6 +38,5 @@ const mapStateToProps = (state: AppStateType) => {
 }
 
 export default connect(mapStateToProps, {
-    setUserProfile,
     getProfileThunk,
 })(withRouter(ProfileContainer))

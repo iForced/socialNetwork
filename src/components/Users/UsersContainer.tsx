@@ -2,12 +2,9 @@ import React from "react";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/reduxStore";
 import {
-    follow, followUserThunk, getUsersThunk,
-    setPage,
-    setTotalUsersCount,
-    setUsers, toggleFollowingProgress,
-    toggleIsFetching,
-    unfollow, unFollowUserThunk,
+    followUserThunk, getUsersThunk,
+    setPage, toggleFollowingProgress,
+    unFollowUserThunk,
     UserType
 } from "../../redux/usersReducer";
 import Users from "./Users";
@@ -22,12 +19,7 @@ type MapStateToPropsType = {
     isFollowingProgress: Array<number>
 }
 type MapDispatchToPropsType = {
-    follow: (userID: number) => void
-    unfollow: (userID: number) => void
-    setUsers: (users: Array<UserType>) => void
     setPage: (pageNumber: number) => void
-    setTotalUsersCount: (count: number) => void
-    toggleIsFetching: (newIsFetching: boolean) => void
     toggleFollowingProgress: (isFetching: boolean, userID: number) => void
     getUsersThunk: (currentPage: number, usersPerPage: number) => void
     unFollowUserThunk: (id: number) => void
@@ -82,12 +74,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 }
 
 const UsersContainer = connect(mapStateToProps, {
-    follow,
-    unfollow,
-    setUsers,
     setPage,
-    setTotalUsersCount,
-    toggleIsFetching,
     toggleFollowingProgress,
     getUsersThunk,
     unFollowUserThunk,
