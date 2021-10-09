@@ -2,9 +2,11 @@ import React from "react";
 import s from './ProfileInfo.module.css'
 import avatar from './../../../logo.svg'
 import {UserProfileType} from "../../../redux/profileReducer";
+import ProfileStatus from "../ProfileStatus/ProfileStatus";
 
 type PropsType = {
     userProfile: UserProfileType | null
+    profileStatus: string
 }
 
 function ProfileInfo(props: PropsType) {
@@ -17,6 +19,9 @@ function ProfileInfo(props: PropsType) {
                 <div className={s.info_avatar}>
                     <img src={props.userProfile?.photos.small || avatar} alt={"avatar"}/>
                 </div>
+                {/*TODO need to fix types*/}
+                {/*@ts-ignore*/}
+                <ProfileStatus profileStatus={props.profileStatus} />
                 <div className={s.info_text}>
                     <p>Привет, меня зовут <b>{props.userProfile?.fullName}</b></p>
                     <p>Я {props.userProfile?.lookingForAJob ? 'в поиске работы' : 'в данный момент не интересуюсь поиском работы'}</p>

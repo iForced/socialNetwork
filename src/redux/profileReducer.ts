@@ -31,12 +31,14 @@ export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string | undefined
     userProfile: UserProfileType | null
+    profileStatus: string
 }
 
 const
     ADD_POST = 'ADD-POST',
     UPDATE_POST_TEXT = 'UPDATE-POST-TEXT',
-    SET_USER_PROFILE = 'SET-USER-PROFILE'
+    SET_USER_PROFILE = 'SET-USER-PROFILE',
+    SET_PROFILE_STATUS = 'SET-PROFILE-STATUS'
 
 const initialState: ProfilePageType = {
     posts: [
@@ -46,6 +48,7 @@ const initialState: ProfilePageType = {
     ],
     newPostText: '',
     userProfile: null,
+    profileStatus: 's'
 }
 
 const profileReducer = (state: ProfilePageType = initialState, action: ActionsType): ProfilePageType => {
@@ -64,6 +67,8 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
             return {...state, newPostText: action.text}
         case SET_USER_PROFILE:
             return {...state, userProfile: action.profile}
+        case SET_PROFILE_STATUS:
+            return {...state, profileStatus: action.status}
         default:
             return state
 
@@ -79,10 +84,18 @@ export const updatePostTextActionCreator = (text: string | undefined) => {
 export const setUserProfile = (profile: UserProfileType) => {
     return {type: SET_USER_PROFILE, profile: profile} as const
 }
+export const setProfileStatus = (status: string) => {
+    return {type: SET_PROFILE_STATUS, status: status} as const
+}
 export const getProfileThunk = (id: string) => (dispatch: Dispatch) => {
     profileAPI().getProfile(id)
         .then(response => response.data)
         .then(data => dispatch(setUserProfile(data)))
+}
+export const getProfileStatusThunk = (id: string) => (dispatch: Dispatch) => {
+    profileAPI().getStatus(id)
+        .then(response => response.data)
+        .then(data => dispatch(setProfileStatus(data)))
 }
 
 export default profileReducer

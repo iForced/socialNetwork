@@ -37,7 +37,11 @@ export const profileAPI = () => {
     return {
         getProfile(id: string) {
             return axiosInstance
-                .get('profile/' + id)
+                .get(`profile/${id}`)
+        },
+        getStatus(id: string) {
+            return axiosInstance
+                .get(`profile/status/${id}`)
         }
     }
 }

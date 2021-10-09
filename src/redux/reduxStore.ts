@@ -1,5 +1,10 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import profileReducer, {addPostActionCreator, setUserProfile, updatePostTextActionCreator} from "./profileReducer";
+import profileReducer, {
+    addPostActionCreator,
+    setProfileStatus,
+    setUserProfile,
+    updatePostTextActionCreator
+} from "./profileReducer";
 import messagesReducer, {addMessageActionCreator, updateMessageTextActionCreator} from "./messagesReducer";
 import navbarReducer from "./navbarReducer";
 import {
@@ -26,6 +31,7 @@ export type setTotalUsersCountActionType = ReturnType<typeof setTotalUsersCount>
 export type toggleIsFetchingActionType = ReturnType<typeof toggleIsFetching>
 export type setUserProfileActionType = ReturnType<typeof setUserProfile>
 export type toggleFollowingProgressActionType = ReturnType<typeof toggleFollowingProgress>
+export type setProfileStatusActionType = ReturnType<typeof setProfileStatus>
 export type ActionsType =
     AddPostActionType |
     UpdatePostTextActionType |
@@ -38,7 +44,8 @@ export type ActionsType =
     setTotalUsersCountActionType |
     toggleIsFetchingActionType |
     setUserProfileActionType |
-    toggleFollowingProgressActionType
+    toggleFollowingProgressActionType |
+    setProfileStatusActionType
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
