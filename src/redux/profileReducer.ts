@@ -87,12 +87,12 @@ export const setUserProfile = (profile: UserProfileType) => {
 export const setProfileStatus = (status: string) => {
     return {type: SET_PROFILE_STATUS, status: status} as const
 }
-export const getProfileThunk = (id: string) => (dispatch: Dispatch) => {
+export const getProfileThunk = (id: number) => (dispatch: Dispatch) => {
     profileAPI().getProfile(id)
         .then(response => response.data)
         .then(data => dispatch(setUserProfile(data)))
 }
-export const getProfileStatusThunk = (id: string) => (dispatch: Dispatch) => {
+export const getProfileStatusThunk = (id: number) => (dispatch: Dispatch) => {
     profileAPI().getStatus(id)
         .then(response => response.data)
         .then(data => dispatch(setProfileStatus(data)))

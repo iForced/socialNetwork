@@ -12,8 +12,8 @@ type mapStateToPropsType = {
     profileStatus: string
 }
 type mapDispatchToPropsType = {
-    getProfileThunk: (id: string) => void
-    getProfileStatusThunk: (id: string) => void
+    getProfileThunk: (id: number) => void
+    getProfileStatusThunk: (id: number) => void
 }
 type PathParamsType = {
     userID: string
@@ -23,8 +23,8 @@ export type UserProfilePropsType = mapStateToPropsType & mapDispatchToPropsType 
 class ProfileContainer extends React.Component<UserProfilePropsType> {
 
     componentDidMount() {
-        let userID = this.props.match.params.userID
-        if (!userID) userID = '2'
+        let userID = +this.props.match.params.userID
+        if (!userID) userID = 2
         this.props.getProfileThunk(userID)
         this.props.getProfileStatusThunk(userID)
     }

@@ -20,7 +20,6 @@ function ProfileInfo(props: PropsType) {
                     <img src={props.userProfile?.photos.small || avatar} alt={"avatar"}/>
                 </div>
                 {/*TODO need to fix types*/}
-                {/*@ts-ignore*/}
                 <ProfileStatus profileStatus={props.profileStatus} />
                 <div className={s.info_text}>
                     <p>Привет, меня зовут <b>{props.userProfile?.fullName}</b></p>

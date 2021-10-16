@@ -1,10 +1,6 @@
 import React from 'react';
-import {AppStateType} from "../../../redux/reduxStore";
-import {connect} from "react-redux";
-import {UserProfileType} from "../../../redux/profileReducer";
 
 type MapStateToPropsType = {
-    userProfile: UserProfileType | null
     profileStatus: string
 }
 
@@ -36,11 +32,4 @@ class ProfileStatus extends React.Component<MapStateToPropsType> {
     }
 }
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
-    return {
-        userProfile: state.profilePage.userProfile,
-        profileStatus: state.profilePage.profileStatus
-    }
-}
-
-export default connect(mapStateToProps)(ProfileStatus);
+export default ProfileStatus

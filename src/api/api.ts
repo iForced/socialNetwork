@@ -35,11 +35,11 @@ export const authAPI = () => {
 }
 export const profileAPI = () => {
     return {
-        getProfile(id: string) {
+        getProfile(id: number) {
             return axiosInstance
                 .get(`profile/${id}`)
         },
-        getStatus(id: string) {
+        getStatus(id: number) {
             return axiosInstance
                 .get(`profile/status/${id}`)
         }
