@@ -48,7 +48,7 @@ const initialState: ProfilePageType = {
     ],
     newPostText: '',
     userProfile: null,
-    profileStatus: 's'
+    profileStatus: ''
 }
 
 const profileReducer = (state: ProfilePageType = initialState, action: ActionsType): ProfilePageType => {
@@ -96,6 +96,12 @@ export const getProfileStatusThunk = (id: number) => (dispatch: Dispatch) => {
     profileAPI().getStatus(id)
         .then(response => response.data)
         .then(data => dispatch(setProfileStatus(data)))
+}
+export const updateProfileStatusThunk = (status: string) => (dispatch: Dispatch) => {
+    profileAPI().updateStatus(status)
+        .then(response => {
+            response.data.resulCode === 0 && dispatch(setProfileStatus(status))
+        })
 }
 
 export default profileReducer

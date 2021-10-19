@@ -1,21 +1,30 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 
 type MapStateToPropsType = {
     profileStatus: string
+    updateProfileStatus: (status: string) => void
 }
 
 class ProfileStatus extends React.Component<MapStateToPropsType> {
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.profileStatus
     }
-    editModeOn() {
+    editModeOn = () => {
         this.setState({
             editMode: true
         })
     }
-    editModeOff() {
+    editModeOff = () => {
         this.setState({
             editMode: false
+        })
+        this.props.updateProfileStatus(this.state.status)
+    }
+    // TODO не перерисовывается компонет при смене статуса. Статус сетается в редакс стейт
+    onChangeStatus = (e: ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            status: e.currentTarget.value
         })
     }
 
@@ -24,8 +33,13 @@ class ProfileStatus extends React.Component<MapStateToPropsType> {
             <div>
                 {
                     this.state.editMode
-                        ? <input value={this.props.profileStatus} autoFocus onBlur={this.editModeOff.bind(this)}/>
-                        : <span onDoubleClick={this.editModeOn.bind(this)}>{this.props.profileStatus}</span>
+                        ? <input
+                            value={this.state.status}
+                            autoFocus
+                            onBlur={this.editModeOff}
+                            onChange={this.onChangeStatus}
+                        />
+                        : <span onDoubleClick={this.editModeOn}>{this.props.profileStatus}</span>
                 }
             </div>
         );

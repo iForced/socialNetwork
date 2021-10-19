@@ -7,12 +7,17 @@ import {UserProfileType} from "../../redux/profileReducer";
 type PropsType = {
     userProfile: UserProfileType | null
     profileStatus: string
+    updateProfileStatus: (status: string) => void
 }
 
 function Profile(props: PropsType) {
     return (
         <div className={s.profile}>
-            <ProfileInfo userProfile={props.userProfile} profileStatus={props.profileStatus}/>
+            <ProfileInfo
+                userProfile={props.userProfile}
+                profileStatus={props.profileStatus}
+                updateProfileStatus={props.updateProfileStatus}
+            />
             <MyPostsContainer />
         </div>
     )

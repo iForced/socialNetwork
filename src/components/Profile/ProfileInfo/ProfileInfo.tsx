@@ -3,13 +3,18 @@ import s from './ProfileInfo.module.css'
 import avatar from './../../../logo.svg'
 import {UserProfileType} from "../../../redux/profileReducer";
 import ProfileStatus from "../ProfileStatus/ProfileStatus";
+import Preloader from "../../common/Preloader";
 
 type PropsType = {
     userProfile: UserProfileType | null
     profileStatus: string
+    updateProfileStatus: (status: string) => void
 }
 
 function ProfileInfo(props: PropsType) {
+    if (!props.userProfile) {
+        return <Preloader />
+    }
     return (
         <div className={s.profile_info}>
             <div className={s.header}>
@@ -19,8 +24,7 @@ function ProfileInfo(props: PropsType) {
                 <div className={s.info_avatar}>
                     <img src={props.userProfile?.photos.small || avatar} alt={"avatar"}/>
                 </div>
-                {/*TODO need to fix types*/}
-                <ProfileStatus profileStatus={props.profileStatus} />
+                <ProfileStatus profileStatus={props.profileStatus} updateProfileStatus={props.updateProfileStatus} />
                 <div className={s.info_text}>
                     <p>Привет, меня зовут <b>{props.userProfile?.fullName}</b></p>
                     <p>Я {props.userProfile?.lookingForAJob ? 'в поиске работы' : 'в данный момент не интересуюсь поиском работы'}</p>
