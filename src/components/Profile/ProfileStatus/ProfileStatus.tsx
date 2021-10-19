@@ -28,6 +28,14 @@ class ProfileStatus extends React.Component<MapStateToPropsType> {
         })
     }
 
+    componentDidUpdate(prevProps: Readonly<MapStateToPropsType>, prevState: Readonly<{}>) {
+        if (prevProps.profileStatus !== this.props.profileStatus) {
+            this.setState({
+                status: this.props.profileStatus
+            })
+        }
+    }
+
     render() {
         return (
             <div>
