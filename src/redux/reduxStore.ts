@@ -3,7 +3,6 @@ import profileReducer, {
     addPostActionCreator,
     setProfileStatus,
     setUserProfile,
-    updatePostTextActionCreator
 } from "./profileReducer";
 import messagesReducer, {addMessageActionCreator, updateMessageTextActionCreator} from "./messagesReducer";
 import navbarReducer from "./navbarReducer";
@@ -21,7 +20,6 @@ import thunk from "redux-thunk";
 import {reducer as formReducer} from 'redux-form'
 
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
-export type UpdatePostTextActionType = ReturnType<typeof updatePostTextActionCreator>
 export type AddMessageActionType = ReturnType<typeof addMessageActionCreator>
 export type UpdateMessageTextActionType = ReturnType<typeof updateMessageTextActionCreator>
 export type followUserActionType = ReturnType<typeof follow>
@@ -35,7 +33,6 @@ export type toggleFollowingProgressActionType = ReturnType<typeof toggleFollowin
 export type setProfileStatusActionType = ReturnType<typeof setProfileStatus>
 export type ActionsType =
     AddPostActionType |
-    UpdatePostTextActionType |
     AddMessageActionType |
     UpdateMessageTextActionType |
     followUserActionType |

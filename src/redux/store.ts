@@ -1,4 +1,4 @@
-import profileReducer, {addPostActionCreator, updatePostTextActionCreator} from "./profileReducer";
+import profileReducer, {addPostActionCreator} from "./profileReducer";
 import messagesReducer, {addMessageActionCreator, updateMessageTextActionCreator} from "./messagesReducer";
 import navbarReducer from "./navbarReducer";
 import {follow, unfollow} from "./usersReducer";
@@ -49,12 +49,11 @@ export type StoreType = {
     dispatch: (action: ActionsType) => void
 }
 type AddPostActionType = ReturnType<typeof addPostActionCreator>
-type UpdatePostTextActionType = ReturnType<typeof updatePostTextActionCreator>
 type AddMessageActionType = ReturnType<typeof addMessageActionCreator>
 type UpdateMessageTextActionType = ReturnType<typeof updateMessageTextActionCreator>
 type followUserActionType = ReturnType<typeof follow>
 type unfollowUserActionType = ReturnType<typeof unfollow>
-type ActionsType = AddPostActionType | UpdatePostTextActionType | AddMessageActionType | UpdateMessageTextActionType | followUserActionType | unfollowUserActionType
+type ActionsType = AddPostActionType | AddMessageActionType | UpdateMessageTextActionType | followUserActionType | unfollowUserActionType
 
 const store: StoreType = {
     _state: {
