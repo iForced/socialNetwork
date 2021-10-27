@@ -18,6 +18,7 @@ import {
 } from "./usersReducer";
 import {authReducer} from "./authReducer";
 import thunk from "redux-thunk";
+import {reducer as formReducer} from 'redux-form'
 
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type UpdatePostTextActionType = ReturnType<typeof updatePostTextActionCreator>
@@ -53,6 +54,7 @@ const rootReducer = combineReducers({
     navbar: navbarReducer,
     usersPage: usersReducer,
     auth: authReducer,
+    form: formReducer,
 })
 
 export type AppStateType = ReturnType<typeof rootReducer>

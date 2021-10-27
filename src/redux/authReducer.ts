@@ -51,7 +51,7 @@ export const authThunk = () => (dispatch: Dispatch) => {
         .then(data => {
             if (data.resultCode === 0) {
                 dispatch(setAuthUserData(data.data.id, data.data.email, data.data.login))
-                dispatch(toggleLogged(true))
+                dispatch(toggleLogged(false))
             }
         })
 }
