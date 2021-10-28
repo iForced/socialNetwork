@@ -4,12 +4,10 @@ import {ActionsType} from "./reduxStore";
 export type MessagesPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
-    newMessageText: string | undefined
 }
 
 const
-    ADD_MESSAGE = 'ADD-MESSAGE',
-    UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT'
+    ADD_MESSAGE = 'ADD-MESSAGE'
 
 const initialState: MessagesPageType = {
     dialogs: [
@@ -24,32 +22,23 @@ const initialState: MessagesPageType = {
         {id: 3, text: 'Who is on duty today'},
         {id: 4, text: 'Let me speak from my heart'},
     ],
-    newMessageText: ''
 }
 
 const messagesReducer = (state: MessagesPageType = initialState, action: ActionsType): MessagesPageType => {
     switch (action.type) {
         case ADD_MESSAGE:
-            if (state.newMessageText) {
-                let newMessage = {
-                    id: Math.floor(Math.random() * 10),
-                    text: state.newMessageText,
-                }
-                return {...state, messages: [...state.messages, newMessage]}
+            let newMessage = {
+                id: Math.floor(Math.random() * 10),
+                text: action.messageText,
             }
-            return state
-        case UPDATE_MESSAGE_TEXT:
-            return {...state, newMessageText: action.text}
+            return {...state, messages: [...state.messages, newMessage]}
         default:
             return state
     }
 }
 
-export const addMessageActionCreator = () => {
-    return {type: ADD_MESSAGE} as const
-}
-export const updateMessageTextActionCreator = (text: string | undefined) => {
-    return {type: UPDATE_MESSAGE_TEXT, text: text} as const
+export const addMessageActionCreator = (messageText: string) => {
+    return {type: ADD_MESSAGE, messageText} as const
 }
 
 export default messagesReducer

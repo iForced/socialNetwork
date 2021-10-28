@@ -4,7 +4,7 @@ import profileReducer, {
     setProfileStatus,
     setUserProfile,
 } from "./profileReducer";
-import messagesReducer, {addMessageActionCreator, updateMessageTextActionCreator} from "./messagesReducer";
+import messagesReducer, {addMessageActionCreator} from "./messagesReducer";
 import navbarReducer from "./navbarReducer";
 import {
     follow,
@@ -21,7 +21,6 @@ import {reducer as formReducer} from 'redux-form'
 
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type AddMessageActionType = ReturnType<typeof addMessageActionCreator>
-export type UpdateMessageTextActionType = ReturnType<typeof updateMessageTextActionCreator>
 export type followUserActionType = ReturnType<typeof follow>
 export type unfollowUserActionType = ReturnType<typeof unfollow>
 export type setUsersActionType = ReturnType<typeof setUsers>
@@ -34,7 +33,6 @@ export type setProfileStatusActionType = ReturnType<typeof setProfileStatus>
 export type ActionsType =
     AddPostActionType |
     AddMessageActionType |
-    UpdateMessageTextActionType |
     followUserActionType |
     unfollowUserActionType |
     setUsersActionType |
