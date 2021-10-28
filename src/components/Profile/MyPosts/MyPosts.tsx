@@ -4,17 +4,19 @@ import Post from "./Post/Post";
 import {MyPostsPropsType} from "./MyPostsContainer";
 import {PostType} from "../../../redux/profileReducer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {TextArea} from "../../../common/FormControl";
+import {fieldRequired, maxLengthCreator} from "../../../utils/validators";
 
 type AddPostFormDataType = {
     postText: string
 }
 
+const maxLength50 = maxLengthCreator(50)
+
 function MyPosts(props: MyPostsPropsType) {
     const postElement = props.posts.map((p: PostType) => {
         return <Post key={p.id} id={p.id} text={p.text} likes={p.likes}/>
     });
-
-    const postInput = React.createRef<HTMLTextAreaElement>();
 
     const addPost = (values: AddPostFormDataType) => {
         props.addPost(values.postText)
@@ -35,8 +37,9 @@ function AddPostForm(props: InjectedFormProps<AddPostFormDataType>) {
         <form className={s.add} onSubmit={props.handleSubmit}>
                 <Field
                     name={'postText'}
-                    component={'textarea'}
+                    component={TextArea}
                     placeholder={"Add new post"}
+                    validate={[fieldRequired, maxLength50]}
                 />
             <button>Add post</button>
         </form>

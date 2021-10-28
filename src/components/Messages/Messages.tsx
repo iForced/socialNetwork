@@ -1,13 +1,17 @@
-import React from "react";
+import React, {useEffect} from "react";
 import s from './Messages.module.css'
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 import {DialogType, MessagesPropsType, MessageType} from "./MessagesContainer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {fieldRequired, maxLengthCreator} from "../../utils/validators";
+import {Input, TextArea} from "../../common/FormControl";
 
 type FormDataType = {
     messageText: string
 }
+
+const maxLength30 = maxLengthCreator(30)
 
 function Messages(props: MessagesPropsType) {
     const dialogElement = props.dialogs.map((d: DialogType) => {
@@ -16,8 +20,6 @@ function Messages(props: MessagesPropsType) {
     const messageElement = props.messages.map((m: MessageType) => {
         return <Message key={m.id} text={m.text} id={m.id}/>
     });
-
-    const messageInput = React.createRef<HTMLTextAreaElement>();
 
     const addMessage = (values: FormDataType) => {
         props.addMessage(values.messageText)
@@ -39,7 +41,7 @@ function Messages(props: MessagesPropsType) {
 function AddMessageForm(props: InjectedFormProps<FormDataType>) {
     return (
         <form onSubmit={props.handleSubmit}>
-            <Field component={'textarea'} name={'messageText'} placeholder={'Add new message'} />
+            <Field component={TextArea} name={'messageText'} placeholder={'Add new message'} validate={[fieldRequired, maxLength30]} />
             <button>Add message</button>
         </form>
     );
