@@ -47,6 +47,10 @@ export const authAPI = () => {
         login(email: string, password: string, rememberMe: boolean) {
             return axiosInstance
                 .post<CommonResponseType<{userId: number}>>('auth/login', {email, password, rememberMe})
+        },
+        logout() {
+            return axiosInstance
+                .delete<CommonResponseType>('auth/login')
         }
     }
 }

@@ -33,7 +33,7 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
     }
 }
 
-export const setAuthUserData = (id: number, email: string, login: string) => {
+export const setAuthUserData = (id: number | null, email: string | null, login: string | null) => {
     return {
         type: SET_USER_DATA,
         data: {id, email, login}
@@ -62,6 +62,16 @@ export const loginThunk = (email: string, password: string, rememberMe: boolean)
         .then(data => {
             if (data.resultCode === 0) {
                 dispatch(authThunk())
+            }
+        })
+}
+export const logoutThunk = () => (dispatch: any) => {
+    authAPI().logout()
+        .then(response => response.data)
+        .then(data => {
+            if (data.resultCode === 0) {
+                dispatch(setAuthUserData(null, null, null))
+                dispatch(toggleLogged(false))
             }
         })
 }
