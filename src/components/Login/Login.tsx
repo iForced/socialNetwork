@@ -35,6 +35,7 @@ function LoginForm(props: InjectedFormProps<FormDataType>) {
             <Field component={Input} name={'password'} placeholder={'Enter password'} type={'password'} validate={[fieldRequired]} />
             <Field component={Input} name={'rememberMe'} type={'checkbox'} /> Remember me
             <button>Log in</button>
+            <div className={s.errorText}>{props.error}</div>
         </form>
     );
 }

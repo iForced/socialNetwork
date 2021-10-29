@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 type InitialStateType = {
     id: null | number
@@ -62,6 +63,8 @@ export const loginThunk = (email: string, password: string, rememberMe: boolean)
         .then(data => {
             if (data.resultCode === 0) {
                 dispatch(authThunk())
+            } else {
+                dispatch(stopSubmit('login', {_error: data.messages.join(',')}))
             }
         })
 }

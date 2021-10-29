@@ -8,7 +8,7 @@ import {
     UserType
 } from "../../redux/usersReducer";
 import Users from "./Users";
-import Preloader from "../common/Preloader";
+import Preloader from "../../common/Preloader";
 import {compose} from "redux";
 
 type MapStateToPropsType = {
