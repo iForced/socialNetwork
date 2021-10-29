@@ -1,11 +1,11 @@
 import React, {ChangeEvent} from 'react';
 
-type MapStateToPropsType = {
+type PropsType = {
     profileStatus: string
     updateProfileStatus: (status: string) => void
 }
 
-class ProfileStatus extends React.Component<MapStateToPropsType> {
+class ProfileStatus extends React.Component<PropsType> {
     state = {
         editMode: false,
         status: this.props.profileStatus
@@ -28,7 +28,7 @@ class ProfileStatus extends React.Component<MapStateToPropsType> {
         })
     }
 
-    componentDidUpdate(prevProps: Readonly<MapStateToPropsType>, prevState: Readonly<{}>) {
+    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>) {
         if (prevProps.profileStatus !== this.props.profileStatus) {
             this.setState({
                 status: this.props.profileStatus

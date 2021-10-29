@@ -2,20 +2,25 @@ import React from 'react';
 import s from './Login.module.css'
 import {reduxForm, Field, InjectedFormProps} from "redux-form";
 import {Input} from "../../common/FormControl";
-import {fieldRequired, maxLengthCreator} from "../../utils/validators";
+import {fieldRequired} from "../../utils/validators";
+import {connect} from "react-redux";
+import {loginThunk} from "../../redux/authReducer";
 
 type FormDataType = {
-    login: string
+    email: string
     password: string
     rememberMe: boolean
 }
+type MapDispatchToProsType = {
+    loginThunk: (email: string, password: string, rememberMe: boolean) => void
+}
 
-const maxLength10 = maxLengthCreator(10)
-
-function Login() {
+function Login(props: MapDispatchToProsType) {
     const onFormSubmit = (formData: FormDataType) => {
-        console.log(formData)
+        props.loginThunk(formData.email, formData.password, formData.rememberMe)
     }
+
+
     return (
         <div>
             <h1>Login</h1>
@@ -27,9 +32,9 @@ function Login() {
 function LoginForm(props: InjectedFormProps<FormDataType>) {
     return (
         <form className={s.form} onSubmit={props.handleSubmit}>
-            <Field component={Input} name={'login'} placeholder={'Enter login'} type={'text'} validate={[fieldRequired, maxLength10]} />
-            <Field component={Input} name={'password'} placeholder={'Enter password'} type={'text'} validate={[fieldRequired, maxLength10]} />
-            <Field component={Input} name={'rememberMe'} type={'checkbox'} validate={[fieldRequired, maxLength10]} /> Remember me
+            <Field component={Input} name={'email'} placeholder={'Enter email'} type={'text'} validate={[fieldRequired]} />
+            <Field component={Input} name={'password'} placeholder={'Enter password'} type={'password'} validate={[fieldRequired]} />
+            <Field component={Input} name={'rememberMe'} type={'checkbox'} /> Remember me
             <button>Log in</button>
         </form>
     );
@@ -37,4 +42,4 @@ function LoginForm(props: InjectedFormProps<FormDataType>) {
 
 const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
 
-export default Login;
+export default connect(null, {loginThunk})(Login);

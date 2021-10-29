@@ -20,7 +20,7 @@ function Header(props: PropsType) {
             <div className={s.login}>
                 {
                     props.isLogged
-                    ? props.login
+                    ? <div>{props.login}</div>
                     : <NavLink to={"/login"}>Login</NavLink>
                 }
             </div>

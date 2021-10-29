@@ -30,6 +30,10 @@ export const authAPI = () => {
         me() {
             return axiosInstance
                 .get('auth/me')
+        },
+        login(email: string, password: string, rememberMe: boolean) {
+            return axiosInstance
+                .post('auth/login', {email, password, rememberMe})
         }
     }
 }

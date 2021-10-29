@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
+import {ThunkAction} from "redux-thunk";
 
 type InitialStateType = {
     id: null | number
@@ -45,13 +46,22 @@ export const toggleLogged = (isLogged: boolean) => {
         isLogged,
     } as const
 }
-export const authThunk = () => (dispatch: Dispatch) => {
+export const authThunk = () => (dispatch: any) => {
     authAPI().me()
         .then(response => response.data)
         .then(data => {
             if (data.resultCode === 0) {
                 dispatch(setAuthUserData(data.data.id, data.data.email, data.data.login))
                 dispatch(toggleLogged(true))
+            }
+        })
+}
+export const loginThunk = (email: string, password: string, rememberMe: boolean) => (dispatch: any) => {
+    authAPI().login(email, password, rememberMe)
+        .then(response => response.data)
+        .then(data => {
+            if (data.resultCode === 0) {
+                dispatch(authThunk())
             }
         })
 }
