@@ -20,7 +20,6 @@ function Login(props: MapDispatchToProsType) {
         props.loginThunk(formData.email, formData.password, formData.rememberMe)
     }
 
-
     return (
         <div>
             <h1>Login</h1>

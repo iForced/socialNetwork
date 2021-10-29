@@ -1,4 +1,17 @@
 import axios from "axios";
+import {UserType} from "../redux/usersReducer";
+import {UserProfileType} from "../redux/profileReducer";
+
+type CommonResponseType<T = {}> = {
+    resultCode: number
+    messages: Array<string>
+    data: T
+}
+type UsersResponseType = {
+    items: Array<UserType>
+    totalCount: number
+    error: string
+}
 
 const axiosInstance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -12,16 +25,16 @@ export const usersAPI = () => {
     return {
         getUsers(currentPage: number, usersPerPage: number) {
             return axiosInstance
-                .get(`users?page=${currentPage}&count=${usersPerPage}`)
+                .get<UsersResponseType>(`users?page=${currentPage}&count=${usersPerPage}`)
                 .then(response => response.data)
         },
         followUser(id: number) {
             return axiosInstance
-                .post(`follow/${id}`)
+                .post<CommonResponseType>(`follow/${id}`)
         },
         unFollowUser(id: number) {
             return axiosInstance
-                .delete(`follow/${id}`)
+                .delete<CommonResponseType>(`follow/${id}`)
         }
     }
 }
@@ -29,11 +42,11 @@ export const authAPI = () => {
     return {
         me() {
             return axiosInstance
-                .get('auth/me')
+                .get<CommonResponseType<{id: number, email: string, login: string}>>('auth/me')
         },
         login(email: string, password: string, rememberMe: boolean) {
             return axiosInstance
-                .post('auth/login', {email, password, rememberMe})
+                .post<CommonResponseType<{userId: number}>>('auth/login', {email, password, rememberMe})
         }
     }
 }
@@ -41,15 +54,15 @@ export const profileAPI = () => {
     return {
         getProfile(id: number) {
             return axiosInstance
-                .get(`profile/${id}`)
+                .get<UserProfileType>(`profile/${id}`)
         },
         getStatus(id: number) {
             return axiosInstance
-                .get(`profile/status/${id}`)
+                .get<string>(`profile/status/${id}`)
         },
         updateStatus(status: string) {
             return axiosInstance
-                .put(`profile/status`, {status})
+                .put<CommonResponseType>(`profile/status`, {status})
         }
     }
 }
