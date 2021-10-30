@@ -47,7 +47,7 @@ export const toggleLogged = (isLogged: boolean) => {
     } as const
 }
 export const authThunk = () => (dispatch: Dispatch) => {
-    authAPI().me()
+    return authAPI().me()
         .then(response => response.data)
         .then(data => {
             if (data.resultCode === 0) {

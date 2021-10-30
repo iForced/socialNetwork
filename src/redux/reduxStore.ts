@@ -18,6 +18,7 @@ import {
 import {authReducer} from "./authReducer";
 import thunk from "redux-thunk";
 import {reducer as formReducer} from 'redux-form'
+import {appReducer} from "./appReducer";
 
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type AddMessageActionType = ReturnType<typeof addMessageActionCreator>
@@ -50,6 +51,7 @@ const rootReducer = combineReducers({
     usersPage: usersReducer,
     auth: authReducer,
     form: formReducer,
+    app: appReducer,
 })
 
 export type AppStateType = ReturnType<typeof rootReducer>

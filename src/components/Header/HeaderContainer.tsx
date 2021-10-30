@@ -18,10 +18,6 @@ export type HeaderPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 class HeaderContainer extends React.Component<HeaderPropsType> {
 
-    componentDidMount() {
-        this.props.authThunk()
-    }
-
     render() {
         return (
             <Header
