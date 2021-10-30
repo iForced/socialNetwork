@@ -8,6 +8,7 @@ type PropsType = {
     email: null | string
     login: null | string
     isLogged: boolean
+    logout: () => void
 }
 
 function Header(props: PropsType) {
@@ -20,8 +21,11 @@ function Header(props: PropsType) {
             <div className={s.login}>
                 {
                     props.isLogged
-                    ? <div>{props.login}</div>
-                    : <NavLink to={"/login"}>Login</NavLink>
+                        ? <>
+                            <div>{props.login}</div>
+                            <button onClick={props.logout}>Logout</button>
+                        </>
+                        : <NavLink to={"/login"}>Login</NavLink>
                 }
             </div>
         </header>

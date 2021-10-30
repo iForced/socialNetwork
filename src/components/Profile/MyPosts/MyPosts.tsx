@@ -32,7 +32,6 @@ function MyPosts(props: MyPostsPropsType) {
 
 function AddPostForm(props: InjectedFormProps<AddPostFormDataType>) {
 
-
     return (
         <form className={s.add} onSubmit={props.handleSubmit}>
                 <Field
